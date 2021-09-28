@@ -134,3 +134,5 @@ dmypy.json
 #Large files 
 .jar
 .csv
+
+.idea/
