@@ -1,5 +1,3 @@
-import requests, re
-from bs4 import BeautifulSoup
 from scraper_remote import ScraperRemote
 import os
 import hashlib
