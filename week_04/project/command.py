@@ -1,5 +1,6 @@
 import argparse, requests, re
 from bs4 import BeautifulSoup
+from scraper_proxy import ScraperProxy
 
 def get_args():
     parser = argparse.ArgumentParser(description="Command that scraps lyrics from an external source")
@@ -20,7 +21,8 @@ def get_songs_list_html(url):
 # incoming/outcomming parameters type
 def get_lyrics_urn_by_song_dict(html):
     result = {}
-    for tr in html.find('table', class_='tdata').find('tbody').find_all('tr'):
+    soup = BeautifulSoup(html, 'html.parser')
+    for tr in soup.find('table', class_='tdata').find('tbody').find_all('tr'):
         link = tr.find_all('td')[0].find('a')
         song_name = link.text.lower()
         song_name = re.sub(r'[,\.:\'"]', '', song_name)
@@ -42,13 +44,17 @@ def main():
 
     url = 'https://www.lyrics.com/artist.php?name=Guano-Apes&aid=295621&o=1'
     domain = '/'.join(url.split('/')[0:3])
-    html = get_songs_list_html(url)
+
+    scriper = ScraperProxy()
+    
+
+    html = scriper.get_songs_list_html(url)
     lyrics_urn_by_song = get_lyrics_urn_by_song_dict(html)
 
     # print(lyrics_urn_by_song)
 
     for song_name, urn in lyrics_urn_by_song.items():
-        lyrics = get_lyrics(domain + urn)
+        lyrics = scriper.get_lyrics(domain + urn)
 
     # print(lyrics_url_by_song_name)
 
