@@ -11,6 +11,8 @@ class ScraperProxy(ScraperRemote):
 
     def get_songs_list_html(self, url):
 
+        print('Getting list of songs from %s' % url)
+
         file_name = self.__build_file_name(url)
 
         if not os.path.isfile(file_name):
@@ -31,7 +33,7 @@ class ScraperProxy(ScraperRemote):
             return result
 
     # TODO: refactor get_lyrics and get_songs_list_html
-    def get_lyrics(self, url):
+    def get_lyrics_html(self, url):
 
         file_name = self.__build_file_name(url)
 
@@ -39,7 +41,7 @@ class ScraperProxy(ScraperRemote):
 
             ScraperProxy.__ensure_directory()
 
-            result = super().get_lyrics(url)
+            result = super().get_lyrics_html(url)
 
             f = open(file_name, 'w')
             f.write(result)
