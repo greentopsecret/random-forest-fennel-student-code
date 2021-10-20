@@ -2,33 +2,35 @@ import os
 import hashlib
 import requests
 
-class RequestsProxy():
 
-    cache_folder = '/Users/maxim/codebase/python/spiced_projects/random-forest-fennel-student-code/week_04/project/cache/'
-    __verbose = False
+class RequestsProxy:
 
-    def verbose():
-        RequestsProxy.__verbose = True
+    def __init__(self):
+        self.__verbose = False
+        self.cache_folder = os.path.dirname(os.path.realpath(__file__)) + '/cache/'
 
-    def get(url):
+    def verbose(self):
+        self.__verbose = True
 
-        RequestsProxy.__log('Request %s' % url)
+    def get(self, url: str):
 
-        file_name = RequestsProxy.__build_file_name(url)
+        self.__log('Request %s' % url)
+
+        file_name = self.__build_file_name(url)
 
         if not os.path.isfile(file_name):
 
-            RequestsProxy.__log('Cache file does not exist. Request from the remote server.')
+            self.__log('Cache file does not exist. Request from the remote server.')
 
-            RequestsProxy.__ensure_directory()
+            self.__ensure_directory()
 
             result = requests.get(url).text
 
             f = open(file_name, 'w')
             f.write(result)
-            f.close
+            f.close()
 
-            RequestsProxy.__log('Result stored in the file %s' % os.path.basename(file_name))
+            self.__log('Result stored in the file %s' % os.path.basename(file_name))
 
             return result
         else:
@@ -37,20 +39,21 @@ class RequestsProxy():
             result = f.read()
             f.close()
 
-            RequestsProxy.__log('Result returned from cache.')
+            self.__log('Result returned from cache.')
 
             return result
 
-    def __transform_to_id(string):
+    @staticmethod
+    def __transform_to_id(string: str) -> str:
         return hashlib.sha256(string.encode('utf-8')).hexdigest()[:15]
 
-    def __build_file_name(string):
-        return RequestsProxy.cache_folder + RequestsProxy.__transform_to_id(string) + '.html'
+    def __build_file_name(self, string: str) -> str:
+        return self.cache_folder + self.__transform_to_id(string) + '.html'
 
-    def __ensure_directory():
-        if not os.path.isdir(RequestsProxy.cache_folder):
-            os.makedirs(RequestsProxy.cache_folder)
+    def __ensure_directory(self):
+        if not os.path.isdir(self.cache_folder):
+            os.makedirs(self.cache_folder)
 
-    def __log(message):
-        if RequestsProxy.__verbose:
+    def __log(self, message):
+        if self.__verbose:
             print(message)
