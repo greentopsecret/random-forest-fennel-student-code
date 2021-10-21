@@ -1,4 +1,3 @@
-from parser import Parser
 from model import Model
 from tqdm import tqdm
 import numpy as np
@@ -6,19 +5,21 @@ import pandas as pd
 import sys
 import argparse
 from requests_proxy import RequestsProxy
+from scraper import Scraper
 
 
 class Command:
 
     def __init__(self):
-        self.requests = RequestsProxy()
-        self.parser = Parser()
         self.model = Model()
+        self.scraper = Scraper()
 
     def exec(self):
         args = Command.__get_args()
         if args.verbose:
-            self.requests.verbose()
+            RequestsProxy.verbose()
+        if args.cache_folder:
+            RequestsProxy.set_cache_folder(args.cache_folder)
 
         X, y = self.__get_lyrics_data_by_user_input(args.cnt)
         self.model.fit(X, y)
@@ -31,7 +32,7 @@ class Command:
             print('Artist: %s' % prediction)
             print('Prediction probability: ', prediction_probability)
             continue_ = input('Do you want to continue? ("exit" for quit, "enter" for continue.) ')
-            if continue_ == 'n':
+            if continue_ == 'exit':
                 print('Bye!')
                 break
 
@@ -43,13 +44,10 @@ class Command:
         )
 
         parser.add_argument('--cnt', help='load only N songs per artist', type=int)
+        parser.add_argument('-c', '--cache-folder', help='path to the cache folder')
         parser.add_argument('-v', '--verbose', help='verbose output', action='store_true')
 
         return parser.parse_args()
-
-    def __get_artist_url(self, artist_name: str) -> str:
-        html = self.requests.get('https://www.lyrics.com/lyrics/%s' % artist_name)
-        return 'https://www.lyrics.com/' + self.parser.parse_artist_url(html, artist_name)
 
     def __get_lyrics_data_by_user_input(self, cnt):
 
@@ -61,21 +59,20 @@ class Command:
             # Enter artist
             try:
                 artist_name = input('Enter artist name: ')
-                artist_url = self.__get_artist_url(artist_name)
+                artist_url = self.scraper.get_artist_url(artist_name)
             except Exception as e:
                 print(e)
-                if input('Continue? ("exit" to quit)) ') == 'n':
+                if input('Continue? ("exit" to quit)) ') == 'exit':
                     sys.exit('Bye!')
                 else:
                     continue
 
             # Search artist and get its list of songs
             try:
-                html = self.requests.get(artist_url)
-                lyrics_url_by_song = self.parser.get_lyrics_url_by_song_dict(html)
+                lyrics_url_by_song = self.scraper.get_lyrics_url_by_song_dict(artist_url)
             except Exception as e:
                 print(e)
-                if input('Continue? ("exit" to quit, "Enter" to enter more artists)) ') == 'n':
+                if input('Continue? ("exit" to quit, "Enter" to enter more artists)) ') == 'exit':
                     sys.exit('Bye!')
                 else:
                     continue
@@ -84,8 +81,7 @@ class Command:
             corpus = []
             for song_name, url in tqdm(lyrics_url_by_song.items()):
                 try:
-                    url = 'https://www.lyrics.com/' + url
-                    lyrics = self.parser.parse_lyrics(self.requests.get(url))
+                    lyrics = self.scraper.parse_lyrics(url)
                 except Exception as e:  # catch *all* exceptions
                     print('Cannot get "%s" from %s (%s)' % (song_name, url, str(e)))
                     continue
