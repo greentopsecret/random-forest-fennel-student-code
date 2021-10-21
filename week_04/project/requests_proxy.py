@@ -24,7 +24,7 @@ class RequestsProxy:
 
         if not os.path.isfile(file_name):
 
-            RequestsProxy.__log('Cache file does not exist. Request from the remote server.')
+            RequestsProxy.__log('Cache file does not exist')
 
             RequestsProxy.__ensure_directory()
 
@@ -63,4 +63,4 @@ class RequestsProxy:
     @staticmethod
     def __log(message):
         if RequestsProxy.__verbose:
-            print(message)
+            print('[REQUEST PROXY]  ' + message)

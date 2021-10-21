@@ -29,7 +29,7 @@ class Model:
     def fit(self, X, y):
         self.pipeline.fit(X, y)
         d = self.pipeline['tf-idf'].transform(X)
-        print(pd.DataFrame(d.toarray(), columns=self.pipeline['tf-idf'].get_feature_names()))
+        # print(pd.DataFrame(d.toarray(), columns=self.pipeline['tf-idf'].get_feature_names()))
 
     def predict(self, fragment):
         fragment = Model.clean_lyrics(fragment)

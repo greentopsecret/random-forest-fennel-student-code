@@ -5,6 +5,7 @@ import pandas as pd
 import sys
 import argparse
 from requests_proxy import RequestsProxy
+from parser_proxy import ParserProxy
 from scraper import Scraper
 
 
@@ -18,6 +19,8 @@ class Command:
         args = Command.__get_args()
         if args.verbose:
             RequestsProxy.verbose()
+            ParserProxy.verbose()
+
         if args.cache_folder:
             RequestsProxy.set_cache_folder(args.cache_folder)
 

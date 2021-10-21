@@ -3,15 +3,13 @@ import re
 
 
 class Parser:
-
-    def __init__(self):
-        self.__verbose = True
-
-    def verbose(self):
-        self.__verbose = True
+    __verbose = False
 
     @staticmethod
-    def get_lyrics_url_by_song_dict(html: str) -> dict:
+    def verbose():
+        Parser.__verbose = True
+
+    def get_lyrics_url_by_song_dict(self, html: str) -> dict:
         result = {}
         table_list = BeautifulSoup(html, 'html.parser').find_all('table', class_='tdata')
         if not table_list:
@@ -40,8 +38,7 @@ class Parser:
 
         return result
 
-    @staticmethod
-    def parse_lyrics(html: str) -> str:
+    def parse_lyrics(self, html: str) -> str:
         text = BeautifulSoup(html, 'html.parser').find(id='lyric-body-text')
         if not text:
             raise Exception('No song found')

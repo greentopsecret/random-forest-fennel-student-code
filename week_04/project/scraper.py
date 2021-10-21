@@ -1,10 +1,10 @@
 from requests_proxy import RequestsProxy
-from parser import Parser
+from parser_proxy import ParserProxy
 
 
 class Scraper:
     def __init__(self):
-        self.parser = Parser()
+        self.parser = ParserProxy()
 
     def get_artist_url(self, artist_name: str) -> str:
         url = 'https://www.lyrics.com/lyrics/%s' % artist_name
@@ -17,6 +17,6 @@ class Scraper:
         return self.parser.get_lyrics_url_by_song_dict(html)
 
     def parse_lyrics(self, url):
-        url = 'https://www.lyrics.com' + url
+        html = RequestsProxy.get('https://www.lyrics.com' + url)
 
-        return self.parser.parse_lyrics(RequestsProxy.get(url))
+        return self.parser.parse_lyrics(html)
