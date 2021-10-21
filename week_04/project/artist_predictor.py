@@ -24,8 +24,9 @@ class Command:
         if args.cache_folder:
             RequestsProxy.set_cache_folder(args.cache_folder)
 
-        X, y = self.__get_lyrics_data_by_user_input(args.cnt)
-        self.model.fit(X, y)
+        data = self.__get_lyrics_data_by_user_input(args.cnt)
+
+        self.model.fit(data['lyrics'], data['artist'])
 
         # The command is ready, ask for user for lyrics input
         print('Command is ready')
@@ -52,10 +53,11 @@ class Command:
 
         return parser.parse_args()
 
-    def __get_lyrics_data_by_user_input(self, cnt):
+    def __get_lyrics_data_by_user_input(self, limit_cnt):
 
-        X = []
-        y = pd.Series(dtype=int)
+        lyrics = []
+        artists = []
+        artists_cnt = 0
 
         while True:
 
@@ -81,7 +83,7 @@ class Command:
                     continue
 
             # Go through artist's songs and pull lyrics
-            corpus = []
+            current_cnt = 0
             for song_name, url in tqdm(lyrics_url_by_song.items()):
                 try:
                     lyrics = self.scraper.parse_lyrics(url)
@@ -89,19 +91,24 @@ class Command:
                     print('Cannot get "%s" from %s (%s)' % (song_name, url, str(e)))
                     continue
 
-                corpus.append(Model.clean_lyrics(lyrics))
+                lyrics.append(Model.clean_lyrics(lyrics))
+                artists.append(artist_name)
 
-                if cnt is not None and len(corpus) >= cnt:
+                current_cnt += 1
+
+                if limit_cnt is not None and current_cnt >= limit_cnt:
                     break
 
-            X = X + corpus
-            y = y.append(pd.Series(artist_name).repeat(len(corpus)), ignore_index=True)
+            artists_cnt += 1
 
             prompt = 'Continue? ("yes" to enter more artists, "enter" for moving forward)'
-            if y.unique().size > 1 and input(prompt) != 'yes':
+            if artists_cnt > 1 and input(prompt) != 'yes':
                 break
 
-        return X, y
+        lyrics = pd.Series(lyrics, name='lyrics')
+        artists = pd.Series(artists, name='artist')
+
+        return pd.concat([lyrics, artists], axis=1)
 
 
 if __name__ == '__main__':
