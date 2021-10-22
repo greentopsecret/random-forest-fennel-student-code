@@ -39,7 +39,8 @@ class ScraperCommand:
         lyrics_list = pd.Series(lyrics_list1 + lyrics_list2, name='lyrics')
         artists_list = pd.Series(artists_list1 + artists_list2, name='artist')
 
-        output_file_name = self.store_data(lyrics_list, artists_list)
+        output_file_name = self.build_output_filename(artists_list.unique(), args.cnt)
+        self.store_data(lyrics_list, artists_list, output_file_name)
 
         print('Lyrics data stored into %s' % output_file_name)
 
@@ -84,9 +85,7 @@ class ScraperCommand:
 
         return parser.parse_args()
 
-    def store_data(self, lyrics_list: pd.Series, artists_list: pd.Series) -> str:
-
-        output_file_name = self.build_output_filename(artists_list.unique())
+    def store_data(self, lyrics_list: pd.Series, artists_list: pd.Series, output_file_name) -> str:
 
         f = open(output_file_name, 'w')
         f.write(pd.concat([lyrics_list, artists_list], axis=1).to_csv(sep=','))
@@ -94,12 +93,16 @@ class ScraperCommand:
 
         return output_file_name
 
-    def build_output_filename(self, artists_list: np.ndarray) -> str:
+    def build_output_filename(self, artists_list: np.ndarray, cnt: int) -> str:
         f = lambda x: re.sub(r'[^\w]', '', x.lower())
         v = np.vectorize(f)
         d = v(artists_list)
 
-        return "%s/data/%s.csv" % (os.path.dirname(os.path.realpath(__file__)), "-".join(d))
+        return "%s/data/%s-%d.csv" % (
+            os.path.dirname(os.path.realpath(__file__)),
+            "-".join(d),
+            cnt
+        )
 
 
 if __name__ == '__main__':
