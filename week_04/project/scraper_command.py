@@ -11,7 +11,7 @@ from parser_proxy import ParserProxy
 from scraper import Scraper
 import re
 
-
+# TODO: idea from Pavel's lightning talk: store artist songs into a separate csv file and scan folder in a predictor command
 class ScraperCommand:
 
     def __init__(self):
@@ -32,12 +32,25 @@ class ScraperCommand:
             lyrics_list1, artists_list1 = self.get_artist_data(artist_name1, args.cnt)
             artist_name2 = args.artist2 if args.artist2 else input('Enter the second artist name: ')
             lyrics_list2, artists_list2 = self.get_artist_data(artist_name2, args.cnt)
+
+            lyrics_list = lyrics_list1 + lyrics_list2
+            artists_list = artists_list1 + artists_list2
+
+            while True:
+                input_ = input('Enter artist name (or "exit" to quit): ')
+                if input_ == "exit":
+                    break
+                else:
+                    l, a = self.get_artist_data(input_, args.cnt)
+                    lyrics_list = lyrics_list + l
+                    artists_list = artists_list + a
+
         except Exception as e:
             print(e)
             sys.exit()
 
-        lyrics_list = pd.Series(lyrics_list1 + lyrics_list2, name='lyrics')
-        artists_list = pd.Series(artists_list1 + artists_list2, name='artist')
+        lyrics_list = pd.Series(lyrics_list, name='lyrics')
+        artists_list = pd.Series(artists_list, name='artist')
 
         output_file_name = self.build_output_filename(artists_list.unique(), args.cnt)
         self.store_data(lyrics_list, artists_list, output_file_name)

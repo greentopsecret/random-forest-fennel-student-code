@@ -23,8 +23,7 @@ class ArtistPredictionCommand:
         while True:
             fragment = input('Enter song fragment: ')
             prediction, prediction_probability = self.model.predict(fragment)
-            print('Artist: %s' % prediction)
-            print('Prediction probability: ', prediction_probability)
+            print('With probability %.2f%% this song belongs to "%s"' % (prediction_probability.max() * 100, prediction[0]))
             continue_ = input('Do you want to continue? ("exit" for quit, "enter" for continue.) ')
             if continue_ == 'exit':
                 print('Bye!')
