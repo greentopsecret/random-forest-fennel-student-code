@@ -79,7 +79,7 @@ class ScraperCommand:
 
         parser.add_argument('--cnt', help='load only N songs per artist', type=int)
         parser.add_argument('--artist1', help='Artist one name')
-        parser.add_argument('--artist2', help='Artist one name')
+        parser.add_argument('--artist2', help='Artist two name')
         parser.add_argument('-v', '--verbose', help='verbose output', action='store_true')
         parser.add_argument('-c', '--cache-folder', help='path to the cache folder')
 
@@ -101,7 +101,7 @@ class ScraperCommand:
         return "%s/data/%s-%d.csv" % (
             os.path.dirname(os.path.realpath(__file__)),
             "-".join(d),
-            cnt
+            cnt if cnt else 0
         )
 
 

@@ -11,7 +11,7 @@ class Model:
     def __init__(self):
         self.pipeline = Pipeline([
             ('tf-idf', TfidfVectorizer(stop_words='english', min_df=4)),
-            ('LR', MultinomialNB())
+            ('LR', MultinomialNB(alpha=0.01))
         ])
 
     @staticmethod
