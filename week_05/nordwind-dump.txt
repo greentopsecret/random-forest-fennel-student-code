@@ -21,6 +21,32 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: all_penguins_clean; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.all_penguins_clean (
+    index bigint,
+    "studyName" text,
+    "Sample Number" bigint,
+    "Species" text,
+    "Region" text,
+    "Island" text,
+    "Stage" text,
+    "Individual ID" text,
+    "Clutch Completion" text,
+    "Date Egg" text,
+    "Culmen Length (mm)" double precision,
+    "Culmen Depth (mm)" double precision,
+    "Flipper Length (mm)" double precision,
+    "Body Mass (g)" double precision,
+    "Real ID" text,
+    "Sex" text
+);
+
+
+ALTER TABLE public.all_penguins_clean OWNER TO postgres;
+
+--
 -- Name: categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -213,6 +239,358 @@ CREATE TABLE public.territories (
 
 
 ALTER TABLE public.territories OWNER TO postgres;
+
+--
+-- Data for Name: all_penguins_clean; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.all_penguins_clean (index, "studyName", "Sample Number", "Species", "Region", "Island", "Stage", "Individual ID", "Clutch Completion", "Date Egg", "Culmen Length (mm)", "Culmen Depth (mm)", "Flipper Length (mm)", "Body Mass (g)", "Real ID", "Sex") FROM stdin;
+0	PAL0708	1	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N1A1	Yes	11/11/07	39.1	18.7	181	3750	A_0	MALE
+1	PAL0708	2	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N1A2	Yes	11/11/07	39.5	17.4	186	3800	A_1	FEMALE
+2	PAL0708	3	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N2A1	Yes	11/16/07	40.3	18	195	3250	A_2	FEMALE
+3	PAL0708	4	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N2A2	Yes	11/16/07	\N	\N	\N	\N	A_3	\N
+4	PAL0708	5	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N3A1	Yes	11/16/07	36.7	19.3	193	3450	A_4	FEMALE
+5	PAL0708	6	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N3A2	Yes	11/16/07	39.3	20.6	190	3650	A_5	MALE
+6	PAL0708	7	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N4A1	No	11/15/07	38.9	17.8	181	3625	A_6	FEMALE
+7	PAL0708	8	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N4A2	No	11/15/07	39.2	19.6	195	4675	A_7	MALE
+8	PAL0708	9	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N5A1	Yes	11/9/07	34.1	18.1	193	3475	A_8	\N
+9	PAL0708	10	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N5A2	Yes	11/9/07	42	20.2	190	4250	A_9	\N
+10	PAL0708	11	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N6A1	Yes	11/9/07	37.8	17.1	186	3300	A_10	\N
+11	PAL0708	12	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N6A2	Yes	11/9/07	37.8	17.3	180	3700	A_11	\N
+12	PAL0708	13	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N7A1	Yes	11/15/07	41.1	17.6	182	3200	A_12	FEMALE
+13	PAL0708	14	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N7A2	Yes	11/15/07	38.6	21.2	191	3800	A_13	MALE
+14	PAL0708	15	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N8A1	Yes	11/16/07	34.6	21.1	198	4400	A_14	MALE
+15	PAL0708	16	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N8A2	Yes	11/16/07	36.6	17.8	185	3700	A_15	FEMALE
+16	PAL0708	17	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N9A1	Yes	11/12/07	38.7	19	195	3450	A_16	FEMALE
+17	PAL0708	18	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N9A2	Yes	11/12/07	42.5	20.7	197	4500	A_17	MALE
+18	PAL0708	19	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N10A1	Yes	11/16/07	34.4	18.4	184	3325	A_18	FEMALE
+19	PAL0708	20	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N10A2	Yes	11/16/07	46	21.5	194	4200	A_19	MALE
+20	PAL0708	21	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N11A1	Yes	11/12/07	37.8	18.3	174	3400	A_20	FEMALE
+21	PAL0708	22	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N11A2	Yes	11/12/07	37.7	18.7	180	3600	A_21	MALE
+22	PAL0708	23	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N12A1	Yes	11/12/07	35.9	19.2	189	3800	A_22	FEMALE
+23	PAL0708	24	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N12A2	Yes	11/12/07	38.2	18.1	185	3950	A_23	MALE
+24	PAL0708	25	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N13A1	Yes	11/10/07	38.8	17.2	180	3800	A_24	MALE
+25	PAL0708	26	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N13A2	Yes	11/10/07	35.3	18.9	187	3800	A_25	FEMALE
+26	PAL0708	27	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N17A1	Yes	11/12/07	40.6	18.6	183	3550	A_26	MALE
+27	PAL0708	28	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N17A2	Yes	11/12/07	40.5	17.9	187	3200	A_27	FEMALE
+28	PAL0708	29	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N18A1	No	11/10/07	37.9	18.6	172	3150	A_28	FEMALE
+29	PAL0708	30	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N18A2	No	11/10/07	40.5	18.9	180	3950	A_29	MALE
+30	PAL0708	31	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N21A1	Yes	11/9/07	39.5	16.7	178	3250	A_30	FEMALE
+31	PAL0708	32	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N21A2	Yes	11/9/07	37.2	18.1	178	3900	A_31	MALE
+32	PAL0708	33	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N22A1	Yes	11/9/07	39.5	17.8	188	3300	A_32	FEMALE
+33	PAL0708	34	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N22A2	Yes	11/9/07	40.9	18.9	184	3900	A_33	MALE
+34	PAL0708	35	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N23A1	Yes	11/16/07	36.4	17	195	3325	A_34	FEMALE
+35	PAL0708	36	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N23A2	Yes	11/16/07	39.2	21.1	196	4150	A_35	MALE
+36	PAL0708	37	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N24A1	Yes	11/16/07	38.8	20	190	3950	A_36	MALE
+37	PAL0708	38	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N24A2	Yes	11/16/07	42.2	18.5	180	3550	A_37	FEMALE
+38	PAL0708	39	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N25A1	No	11/13/07	37.6	19.3	181	3300	A_38	FEMALE
+39	PAL0708	40	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N25A2	No	11/13/07	39.8	19.1	184	4650	A_39	MALE
+40	PAL0708	41	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N26A1	Yes	11/16/07	36.5	18	182	3150	A_40	FEMALE
+41	PAL0708	42	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N26A2	Yes	11/16/07	40.8	18.4	195	3900	A_41	MALE
+42	PAL0708	43	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N27A1	Yes	11/19/07	36	18.5	186	3100	A_42	FEMALE
+43	PAL0708	44	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N27A2	Yes	11/19/07	44.1	19.7	196	4400	A_43	MALE
+44	PAL0708	45	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N28A1	Yes	11/16/07	37	16.9	185	3000	A_44	FEMALE
+45	PAL0708	46	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N28A2	Yes	11/16/07	39.6	18.8	190	4600	A_45	MALE
+46	PAL0708	47	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N29A1	Yes	11/13/07	41.1	19	182	3425	A_46	MALE
+47	PAL0708	48	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N29A2	Yes	11/13/07	37.5	18.9	179	2975	A_47	\N
+48	PAL0708	49	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N30A1	Yes	11/13/07	36	17.9	190	3450	A_48	FEMALE
+49	PAL0708	50	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N30A2	Yes	11/13/07	42.3	21.2	191	4150	A_49	MALE
+50	PAL0809	51	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N21A1	Yes	11/6/08	39.6	17.7	186	3500	A_50	FEMALE
+51	PAL0809	52	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N21A2	Yes	11/6/08	40.1	18.9	188	4300	A_51	MALE
+52	PAL0809	53	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N22A1	Yes	11/9/08	35	17.9	190	3450	A_52	FEMALE
+53	PAL0809	54	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N22A2	Yes	11/9/08	42	19.5	200	4050	A_53	MALE
+54	PAL0809	55	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N23A1	Yes	11/9/08	34.5	18.1	187	2900	A_54	FEMALE
+55	PAL0809	56	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N23A2	Yes	11/9/08	41.4	18.6	191	3700	A_55	MALE
+56	PAL0809	57	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N24A1	Yes	11/15/08	39	17.5	186	3550	A_56	FEMALE
+57	PAL0809	58	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N24A2	Yes	11/15/08	40.6	18.8	193	3800	A_57	MALE
+58	PAL0809	59	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N25A1	Yes	11/15/08	36.5	16.6	181	2850	A_58	FEMALE
+59	PAL0809	60	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N25A2	Yes	11/15/08	37.6	19.1	194	3750	A_59	MALE
+60	PAL0809	61	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N27A1	Yes	11/13/08	35.7	16.9	185	3150	A_60	FEMALE
+61	PAL0809	62	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N27A2	Yes	11/13/08	41.3	21.1	195	4400	A_61	MALE
+62	PAL0809	63	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N28A1	Yes	11/13/08	37.6	17	185	3600	A_62	FEMALE
+63	PAL0809	64	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N28A2	Yes	11/13/08	41.1	18.2	192	4050	A_63	MALE
+64	PAL0809	65	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N29A1	Yes	11/13/08	36.4	17.1	184	2850	A_64	FEMALE
+65	PAL0809	66	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N29A2	Yes	11/13/08	41.6	18	192	3950	A_65	MALE
+66	PAL0809	67	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N30A1	Yes	11/6/08	35.5	16.2	195	3350	A_66	FEMALE
+67	PAL0809	68	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N30A2	Yes	11/6/08	41.1	19.1	188	4100	A_67	MALE
+68	PAL0809	69	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N32A1	No	11/11/08	35.9	16.6	190	3050	A_68	FEMALE
+69	PAL0809	70	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N32A2	No	11/11/08	41.8	19.4	198	4450	A_69	MALE
+70	PAL0809	71	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N34A1	Yes	11/14/08	33.5	19	190	3600	A_70	FEMALE
+71	PAL0809	72	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N34A2	Yes	11/14/08	39.7	18.4	190	3900	A_71	MALE
+72	PAL0809	73	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N35A1	Yes	11/11/08	39.6	17.2	196	3550	A_72	FEMALE
+73	PAL0809	74	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N35A2	Yes	11/11/08	45.8	18.9	197	4150	A_73	MALE
+74	PAL0809	75	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N36A1	Yes	11/8/08	35.5	17.5	190	3700	A_74	FEMALE
+75	PAL0809	76	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N36A2	Yes	11/8/08	42.8	18.5	195	4250	A_75	MALE
+76	PAL0809	77	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N37A1	Yes	11/6/08	40.9	16.8	191	3700	A_76	FEMALE
+77	PAL0809	78	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N37A2	Yes	11/6/08	37.2	19.4	184	3900	A_77	MALE
+78	PAL0809	79	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N38A1	Yes	11/9/08	36.2	16.1	187	3550	A_78	FEMALE
+79	PAL0809	80	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N38A2	Yes	11/9/08	42.1	19.1	195	4000	A_79	MALE
+80	PAL0809	81	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N39A1	Yes	11/2/08	34.6	17.2	189	3200	A_80	FEMALE
+81	PAL0809	82	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N39A2	Yes	11/2/08	42.9	17.6	196	4700	A_81	MALE
+82	PAL0809	83	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N40A1	Yes	11/7/08	36.7	18.8	187	3800	A_82	FEMALE
+83	PAL0809	84	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N40A2	Yes	11/7/08	35.1	19.4	193	4200	A_83	MALE
+84	PAL0809	85	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N41A1	Yes	11/17/08	37.3	17.8	191	3350	A_84	FEMALE
+85	PAL0809	86	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N41A2	Yes	11/17/08	41.3	20.3	194	3550	A_85	MALE
+86	PAL0809	87	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N42A1	Yes	11/8/08	36.3	19.5	190	3800	A_86	MALE
+87	PAL0809	88	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N42A2	Yes	11/8/08	36.9	18.6	189	3500	A_87	FEMALE
+88	PAL0809	89	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N44A1	Yes	11/8/08	38.3	19.2	189	3950	A_88	MALE
+89	PAL0809	90	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N44A2	Yes	11/8/08	38.9	18.8	190	3600	A_89	FEMALE
+90	PAL0809	91	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N45A1	Yes	11/14/08	35.7	18	202	3550	A_90	FEMALE
+91	PAL0809	92	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N45A2	Yes	11/14/08	41.1	18.1	205	4300	A_91	MALE
+92	PAL0809	93	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N46A1	Yes	11/5/08	34	17.1	185	3400	A_92	FEMALE
+93	PAL0809	94	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N46A2	Yes	11/5/08	39.6	18.1	186	4450	A_93	MALE
+94	PAL0809	95	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N48A1	Yes	11/17/08	36.2	17.3	187	3300	A_94	FEMALE
+95	PAL0809	96	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N48A2	Yes	11/17/08	40.8	18.9	208	4300	A_95	MALE
+96	PAL0809	97	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N49A1	Yes	11/8/08	38.1	18.6	190	3700	A_96	FEMALE
+97	PAL0809	98	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N49A2	Yes	11/8/08	40.3	18.5	196	4350	A_97	MALE
+98	PAL0809	99	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N50A1	Yes	11/10/08	33.1	16.1	178	2900	A_98	FEMALE
+99	PAL0809	100	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N50A2	Yes	11/10/08	43.2	18.5	192	4100	A_99	MALE
+100	PAL0910	101	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N47A1	Yes	11/9/09	35	17.9	192	3725	A_100	FEMALE
+101	PAL0910	102	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N47A2	Yes	11/9/09	41	20	203	4725	A_101	MALE
+102	PAL0910	103	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N49A1	Yes	11/15/09	37.7	16	183	3075	A_102	FEMALE
+103	PAL0910	104	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N49A2	Yes	11/15/09	37.8	20	190	4250	A_103	MALE
+104	PAL0910	105	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N51A1	Yes	11/15/09	37.9	18.6	193	2925	A_104	FEMALE
+105	PAL0910	106	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N51A2	Yes	11/15/09	39.7	18.9	184	3550	A_105	MALE
+106	PAL0910	107	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N53A1	Yes	11/15/09	38.6	17.2	199	3750	A_106	FEMALE
+107	PAL0910	108	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N53A2	Yes	11/15/09	38.2	20	190	3900	A_107	MALE
+108	PAL0910	109	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N55A1	Yes	11/20/09	38.1	17	181	3175	A_108	FEMALE
+109	PAL0910	110	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N55A2	Yes	11/20/09	43.2	19	197	4775	A_109	MALE
+110	PAL0910	111	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N58A1	Yes	11/12/09	38.1	16.5	198	3825	A_110	FEMALE
+111	PAL0910	112	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N58A2	Yes	11/12/09	45.6	20.3	191	4600	A_111	MALE
+112	PAL0910	113	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N60A1	Yes	11/15/09	39.7	17.7	193	3200	A_112	FEMALE
+113	PAL0910	114	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N60A2	Yes	11/15/09	42.2	19.5	197	4275	A_113	MALE
+114	PAL0910	115	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N61A1	Yes	11/17/09	39.6	20.7	191	3900	A_114	FEMALE
+115	PAL0910	116	Adelie	Anvers	Biscoe	Adult, 1 Egg Stage	N61A2	Yes	11/17/09	42.7	18.3	196	4075	A_115	MALE
+116	PAL0910	117	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N63A1	Yes	11/18/09	38.6	17	188	2900	A_116	FEMALE
+117	PAL0910	118	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N63A2	Yes	11/18/09	37.3	20.5	199	3775	A_117	MALE
+118	PAL0910	119	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N64A1	Yes	11/22/09	35.7	17	189	3350	A_118	FEMALE
+119	PAL0910	120	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N64A2	Yes	11/22/09	41.1	18.6	189	3325	A_119	MALE
+120	PAL0910	121	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N66A1	No	11/17/09	36.2	17.2	187	3150	A_120	FEMALE
+121	PAL0910	122	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N66A2	No	11/17/09	37.7	19.8	198	3500	A_121	MALE
+122	PAL0910	123	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N67A1	Yes	11/16/09	40.2	17	176	3450	A_122	FEMALE
+123	PAL0910	124	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N67A2	Yes	11/16/09	41.4	18.5	202	3875	A_123	MALE
+124	PAL0910	125	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N69A1	Yes	11/18/09	35.2	15.9	186	3050	A_124	FEMALE
+125	PAL0910	126	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N69A2	Yes	11/18/09	40.6	19	199	4000	A_125	MALE
+126	PAL0910	127	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N71A1	Yes	11/21/09	38.8	17.6	191	3275	A_126	FEMALE
+127	PAL0910	128	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N71A2	Yes	11/21/09	41.5	18.3	195	4300	A_127	MALE
+128	PAL0910	129	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N72A1	Yes	11/18/09	39	17.1	191	3050	A_128	FEMALE
+129	PAL0910	130	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N72A2	Yes	11/18/09	44.1	18	210	4000	A_129	MALE
+130	PAL0910	131	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N73A1	No	11/23/09	38.5	17.9	190	3325	A_130	FEMALE
+131	PAL0910	132	Adelie	Anvers	Torgersen	Adult, 1 Egg Stage	N73A2	No	11/23/09	43.1	19.2	197	3500	A_131	MALE
+132	PAL0910	133	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N76A1	Yes	11/10/09	36.8	18.5	193	3500	A_132	FEMALE
+133	PAL0910	134	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N76A2	Yes	11/10/09	37.5	18.5	199	4475	A_133	MALE
+134	PAL0910	135	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N77A1	Yes	11/13/09	38.1	17.6	187	3425	A_134	FEMALE
+135	PAL0910	136	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N77A2	Yes	11/13/09	41.1	17.5	190	3900	A_135	MALE
+136	PAL0910	137	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N78A1	Yes	11/16/09	35.6	17.5	191	3175	A_136	FEMALE
+137	PAL0910	138	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N78A2	Yes	11/16/09	40.2	20.1	200	3975	A_137	MALE
+138	PAL0910	139	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N79A1	No	11/16/09	37	16.5	185	3400	A_138	FEMALE
+139	PAL0910	140	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N79A2	No	11/16/09	39.7	17.9	193	4250	A_139	MALE
+140	PAL0910	141	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N80A1	Yes	11/14/09	40.2	17.1	193	3400	A_140	FEMALE
+141	PAL0910	142	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N80A2	Yes	11/14/09	40.6	17.2	187	3475	A_141	MALE
+142	PAL0910	143	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N81A1	Yes	11/16/09	32.1	15.5	188	3050	A_142	FEMALE
+143	PAL0910	144	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N81A2	Yes	11/16/09	40.7	17	190	3725	A_143	MALE
+144	PAL0910	145	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N82A1	Yes	11/16/09	37.3	16.8	192	3000	A_144	FEMALE
+145	PAL0910	146	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N82A2	Yes	11/16/09	39	18.7	185	3650	A_145	MALE
+146	PAL0910	147	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N83A1	Yes	11/13/09	39.2	18.6	190	4250	A_146	MALE
+147	PAL0910	148	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N83A2	Yes	11/13/09	36.6	18.4	184	3475	A_147	FEMALE
+148	PAL0910	149	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N84A1	Yes	11/17/09	36	17.8	195	3450	A_148	FEMALE
+149	PAL0910	150	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N84A2	Yes	11/17/09	37.8	18.1	193	3750	A_149	MALE
+150	PAL0910	151	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N85A1	Yes	11/17/09	36	17.1	187	3700	A_150	FEMALE
+151	PAL0910	152	Adelie	Anvers	Dream	Adult, 1 Egg Stage	N85A2	Yes	11/17/09	41.5	18.5	201	4000	A_151	MALE
+152	PAL0708	1	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N61A1	No	11/19/07	46.5	17.9	192	3500	C_152	FEMALE
+153	PAL0708	2	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N61A2	No	11/19/07	50	19.5	196	3900	C_153	MALE
+154	PAL0708	3	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N62A1	Yes	11/26/07	51.3	19.2	193	3650	C_154	MALE
+155	PAL0708	4	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N62A2	Yes	11/26/07	45.4	18.7	188	3525	C_155	FEMALE
+156	PAL0708	5	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N64A1	Yes	11/21/07	52.7	19.8	197	3725	C_156	MALE
+157	PAL0708	6	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N64A2	Yes	11/21/07	45.2	17.8	198	3950	C_157	FEMALE
+158	PAL0708	7	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N66A1	Yes	11/28/07	46.1	18.2	178	3250	C_158	FEMALE
+159	PAL0708	8	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N66A2	Yes	11/28/07	51.3	18.2	197	3750	C_159	MALE
+160	PAL0708	9	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N67A1	Yes	11/21/07	46	18.9	195	4150	C_160	FEMALE
+161	PAL0708	10	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N67A2	Yes	11/21/07	51.3	19.9	198	3700	C_161	MALE
+162	PAL0708	11	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N68A1	Yes	11/28/07	46.6	17.8	193	3800	C_162	FEMALE
+163	PAL0708	12	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N68A2	Yes	11/28/07	51.7	20.3	194	3775	C_163	MALE
+164	PAL0708	13	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N69A1	Yes	11/26/07	47	17.3	185	3700	C_164	FEMALE
+165	PAL0708	14	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N69A2	Yes	11/26/07	52	18.1	201	4050	C_165	MALE
+166	PAL0708	15	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N70A1	Yes	11/22/07	45.9	17.1	190	3575	C_166	FEMALE
+167	PAL0708	16	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N70A2	Yes	11/22/07	50.5	19.6	201	4050	C_167	MALE
+168	PAL0708	17	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N71A1	No	11/30/07	50.3	20	197	3300	C_168	MALE
+169	PAL0708	18	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N71A2	No	11/30/07	58	17.8	181	3700	C_169	FEMALE
+170	PAL0708	19	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N72A1	Yes	11/30/07	46.4	18.6	190	3450	C_170	FEMALE
+171	PAL0708	20	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N72A2	Yes	11/30/07	49.2	18.2	195	4400	C_171	MALE
+172	PAL0708	21	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N73A1	Yes	12/3/07	42.4	17.3	181	3600	C_172	FEMALE
+173	PAL0708	22	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N73A2	Yes	12/3/07	48.5	17.5	191	3400	C_173	MALE
+174	PAL0708	23	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N85A1	No	11/28/07	43.2	16.6	187	2900	C_174	FEMALE
+175	PAL0708	24	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N85A2	No	11/28/07	50.6	19.4	193	3800	C_175	MALE
+176	PAL0708	25	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N89A1	No	11/28/07	46.7	17.9	195	3300	C_176	FEMALE
+177	PAL0708	26	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N89A2	No	11/28/07	52	19	197	4150	C_177	MALE
+178	PAL0809	27	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N61A1	No	11/25/08	50.5	18.4	200	3400	C_178	FEMALE
+179	PAL0809	28	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N61A2	No	11/25/08	49.5	19	200	3800	C_179	MALE
+180	PAL0809	29	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N62A1	Yes	11/14/08	46.4	17.8	191	3700	C_180	FEMALE
+181	PAL0809	30	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N62A2	Yes	11/14/08	52.8	20	205	4550	C_181	MALE
+182	PAL0809	31	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N63A1	Yes	11/24/08	40.9	16.6	187	3200	C_182	FEMALE
+183	PAL0809	32	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N63A2	Yes	11/24/08	54.2	20.8	201	4300	C_183	MALE
+184	PAL0809	33	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N65A1	Yes	11/24/08	42.5	16.7	187	3350	C_184	FEMALE
+185	PAL0809	34	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N65A2	Yes	11/24/08	51	18.8	203	4100	C_185	MALE
+186	PAL0809	35	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N67A1	Yes	11/25/08	49.7	18.6	195	3600	C_186	MALE
+187	PAL0809	36	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N67A2	Yes	11/25/08	47.5	16.8	199	3900	C_187	FEMALE
+188	PAL0809	37	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N69A1	Yes	11/14/08	47.6	18.3	195	3850	C_188	FEMALE
+189	PAL0809	38	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N69A2	Yes	11/14/08	52	20.7	210	4800	C_189	MALE
+190	PAL0809	39	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N72A1	No	11/24/08	46.9	16.6	192	2700	C_190	FEMALE
+191	PAL0809	40	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N72A2	No	11/24/08	53.5	19.9	205	4500	C_191	MALE
+192	PAL0809	41	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N74A1	Yes	11/24/08	49	19.5	210	3950	C_192	MALE
+193	PAL0809	42	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N74A2	Yes	11/24/08	46.2	17.5	187	3650	C_193	FEMALE
+194	PAL0809	43	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N75A1	Yes	11/14/08	50.9	19.1	196	3550	C_194	MALE
+195	PAL0809	44	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N75A2	Yes	11/14/08	45.5	17	196	3500	C_195	FEMALE
+196	PAL0910	45	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N86A1	Yes	11/17/09	50.9	17.9	196	3675	C_196	FEMALE
+197	PAL0910	46	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N86A2	Yes	11/17/09	50.8	18.5	201	4450	C_197	MALE
+198	PAL0910	47	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N87A1	Yes	11/27/09	50.1	17.9	190	3400	C_198	FEMALE
+199	PAL0910	48	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N87A2	Yes	11/27/09	49	19.6	212	4300	C_199	MALE
+200	PAL0910	49	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N88A1	Yes	11/23/09	51.5	18.7	187	3250	C_200	MALE
+201	PAL0910	50	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N88A2	Yes	11/23/09	49.8	17.3	198	3675	C_201	FEMALE
+202	PAL0910	51	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N90A1	Yes	11/21/09	48.1	16.4	199	3325	C_202	FEMALE
+203	PAL0910	52	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N90A2	Yes	11/21/09	51.4	19	201	3950	C_203	MALE
+204	PAL0910	53	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N92A1	Yes	11/23/09	45.7	17.3	193	3600	C_204	FEMALE
+205	PAL0910	54	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N92A2	Yes	11/23/09	50.7	19.7	203	4050	C_205	MALE
+206	PAL0910	55	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N93A1	Yes	11/27/09	42.5	17.3	187	3350	C_206	FEMALE
+207	PAL0910	56	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N93A2	Yes	11/27/09	52.2	18.8	197	3450	C_207	MALE
+208	PAL0910	57	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N94A1	Yes	11/21/09	45.2	16.6	191	3250	C_208	FEMALE
+209	PAL0910	58	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N94A2	Yes	11/21/09	49.3	19.9	203	4050	C_209	MALE
+210	PAL0910	59	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N95A1	Yes	11/21/09	50.2	18.8	202	3800	C_210	MALE
+211	PAL0910	60	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N95A2	Yes	11/21/09	45.6	19.4	194	3525	C_211	FEMALE
+212	PAL0910	61	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N96A1	Yes	11/27/09	51.9	19.5	206	3950	C_212	MALE
+213	PAL0910	62	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N96A2	Yes	11/27/09	46.8	16.5	189	3650	C_213	FEMALE
+214	PAL0910	63	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N98A1	Yes	11/19/09	45.7	17	195	3650	C_214	FEMALE
+215	PAL0910	64	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N98A2	Yes	11/19/09	55.8	19.8	207	4000	C_215	MALE
+216	PAL0910	65	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N99A1	No	11/21/09	43.5	18.1	202	3400	C_216	FEMALE
+217	PAL0910	66	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N99A2	No	11/21/09	49.6	18.2	193	3775	C_217	MALE
+218	PAL0910	67	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N100A1	Yes	11/21/09	50.8	19	210	4100	C_218	MALE
+219	PAL0910	68	Chinstrap	Anvers	Dream	Adult, 1 Egg Stage	N100A2	Yes	11/21/09	50.2	18.7	198	3775	C_219	FEMALE
+220	PAL0708	1	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N31A1	Yes	11/27/07	46.1	13.2	211	4500	G_220	FEMALE
+221	PAL0708	2	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N31A2	Yes	11/27/07	50	16.3	230	5700	G_221	MALE
+222	PAL0708	3	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N32A1	Yes	11/27/07	48.7	14.1	210	4450	G_222	FEMALE
+223	PAL0708	4	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N32A2	Yes	11/27/07	50	15.2	218	5700	G_223	MALE
+224	PAL0708	5	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N33A1	Yes	11/18/07	47.6	14.5	215	5400	G_224	MALE
+225	PAL0708	6	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N33A2	Yes	11/18/07	46.5	13.5	210	4550	G_225	FEMALE
+226	PAL0708	7	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N34A1	Yes	11/27/07	45.4	14.6	211	4800	G_226	FEMALE
+227	PAL0708	8	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N34A2	Yes	11/27/07	46.7	15.3	219	5200	G_227	MALE
+228	PAL0708	9	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N35A1	Yes	11/27/07	43.3	13.4	209	4400	G_228	FEMALE
+229	PAL0708	10	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N35A2	Yes	11/27/07	46.8	15.4	215	5150	G_229	MALE
+230	PAL0708	11	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N36A1	No	11/27/07	40.9	13.7	214	4650	G_230	FEMALE
+231	PAL0708	12	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N36A2	No	11/27/07	49	16.1	216	5550	G_231	MALE
+232	PAL0708	13	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N37A1	Yes	11/29/07	45.5	13.7	214	4650	G_232	FEMALE
+233	PAL0708	14	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N37A2	Yes	11/29/07	48.4	14.6	213	5850	G_233	MALE
+234	PAL0708	15	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N38A1	Yes	12/3/07	45.8	14.6	210	4200	G_234	FEMALE
+235	PAL0708	16	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N38A2	Yes	12/3/07	49.3	15.7	217	5850	G_235	MALE
+236	PAL0708	17	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N39A1	Yes	11/27/07	42	13.5	210	4150	G_236	FEMALE
+237	PAL0708	18	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N39A2	Yes	11/27/07	49.2	15.2	221	6300	G_237	MALE
+238	PAL0708	19	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N40A1	Yes	11/27/07	46.2	14.5	209	4800	G_238	FEMALE
+239	PAL0708	20	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N40A2	Yes	11/27/07	48.7	15.1	222	5350	G_239	MALE
+240	PAL0708	21	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N41A1	Yes	11/27/07	50.2	14.3	218	5700	G_240	MALE
+241	PAL0708	22	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N41A2	Yes	11/27/07	45.1	14.5	215	5000	G_241	FEMALE
+242	PAL0708	23	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N42A1	Yes	11/27/07	46.5	14.5	213	4400	G_242	FEMALE
+243	PAL0708	24	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N42A2	Yes	11/27/07	46.3	15.8	215	5050	G_243	MALE
+244	PAL0708	25	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N44A1	Yes	11/29/07	42.9	13.1	215	5000	G_244	FEMALE
+245	PAL0708	26	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N44A2	Yes	11/29/07	46.1	15.1	215	5100	G_245	MALE
+246	PAL0708	27	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N46A1	Yes	11/29/07	44.5	14.3	216	4100	G_246	\N
+247	PAL0708	28	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N46A2	Yes	11/29/07	47.8	15	215	5650	G_247	MALE
+248	PAL0708	29	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N47A1	Yes	11/29/07	48.2	14.3	210	4600	G_248	FEMALE
+249	PAL0708	30	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N47A2	Yes	11/29/07	50	15.3	220	5550	G_249	MALE
+250	PAL0708	31	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N50A1	Yes	11/29/07	47.3	15.3	222	5250	G_250	MALE
+251	PAL0708	32	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N50A2	Yes	11/29/07	42.8	14.2	209	4700	G_251	FEMALE
+252	PAL0708	33	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N56A1	Yes	12/3/07	45.1	14.5	207	5050	G_252	FEMALE
+253	PAL0708	34	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N56A2	Yes	12/3/07	59.6	17	230	6050	G_253	MALE
+254	PAL0809	35	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N2A1	Yes	11/13/08	49.1	14.8	220	5150	G_254	FEMALE
+255	PAL0809	36	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N2A2	Yes	11/13/08	48.4	16.3	220	5400	G_255	MALE
+256	PAL0809	37	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N4A1	Yes	11/2/08	42.6	13.7	213	4950	G_256	FEMALE
+257	PAL0809	38	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N4A2	Yes	11/2/08	44.4	17.3	219	5250	G_257	MALE
+258	PAL0809	39	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N5A1	Yes	11/9/08	44	13.6	208	4350	G_258	FEMALE
+259	PAL0809	40	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N5A2	Yes	11/9/08	48.7	15.7	208	5350	G_259	MALE
+260	PAL0809	41	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N6A1	No	11/4/08	42.7	13.7	208	3950	G_260	FEMALE
+261	PAL0809	42	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N6A2	No	11/4/08	49.6	16	225	5700	G_261	MALE
+262	PAL0809	43	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N7A1	Yes	11/4/08	45.3	13.7	210	4300	G_262	FEMALE
+263	PAL0809	44	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N7A2	Yes	11/4/08	49.6	15	216	4750	G_263	MALE
+264	PAL0809	45	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N8A1	Yes	11/3/08	50.5	15.9	222	5550	G_264	MALE
+265	PAL0809	46	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N8A2	Yes	11/3/08	43.6	13.9	217	4900	G_265	FEMALE
+266	PAL0809	47	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N11A1	No	11/9/08	45.5	13.9	210	4200	G_266	FEMALE
+267	PAL0809	48	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N11A2	No	11/9/08	50.5	15.9	225	5400	G_267	MALE
+268	PAL0809	49	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N12A1	Yes	11/2/08	44.9	13.3	213	5100	G_268	FEMALE
+269	PAL0809	50	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N12A2	Yes	11/2/08	45.2	15.8	215	5300	G_269	MALE
+270	PAL0809	51	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N13A1	Yes	11/4/08	46.6	14.2	210	4850	G_270	FEMALE
+271	PAL0809	52	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N13A2	Yes	11/4/08	48.5	14.1	220	5300	G_271	MALE
+272	PAL0809	53	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N14A1	Yes	11/4/08	45.1	14.4	210	4400	G_272	FEMALE
+273	PAL0809	54	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N14A2	Yes	11/4/08	50.1	15	225	5000	G_273	MALE
+274	PAL0809	55	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N15A1	Yes	11/4/08	46.5	14.4	217	4900	G_274	FEMALE
+275	PAL0809	56	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N15A2	Yes	11/4/08	45	15.4	220	5050	G_275	MALE
+276	PAL0809	57	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N16A1	Yes	11/3/08	43.8	13.9	208	4300	G_276	FEMALE
+277	PAL0809	58	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N16A2	Yes	11/3/08	45.5	15	220	5000	G_277	MALE
+278	PAL0809	59	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N17A1	Yes	11/6/08	43.2	14.5	208	4450	G_278	FEMALE
+279	PAL0809	60	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N17A2	Yes	11/6/08	50.4	15.3	224	5550	G_279	MALE
+280	PAL0809	61	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N18A1	Yes	11/3/08	45.3	13.8	208	4200	G_280	FEMALE
+281	PAL0809	62	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N18A2	Yes	11/3/08	46.2	14.9	221	5300	G_281	MALE
+282	PAL0809	63	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N19A1	Yes	11/13/08	45.7	13.9	214	4400	G_282	FEMALE
+283	PAL0809	64	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N19A2	Yes	11/13/08	54.3	15.7	231	5650	G_283	MALE
+284	PAL0809	65	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N20A1	Yes	11/4/08	45.8	14.2	219	4700	G_284	FEMALE
+285	PAL0809	66	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N20A2	Yes	11/4/08	49.8	16.8	230	5700	G_285	MALE
+286	PAL0809	67	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N51A1	Yes	11/9/08	46.2	14.4	214	4650	G_286	\N
+287	PAL0809	68	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N51A2	Yes	11/9/08	49.5	16.2	229	5800	G_287	MALE
+288	PAL0809	69	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N53A1	Yes	11/13/08	43.5	14.2	220	4700	G_288	FEMALE
+289	PAL0809	70	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N53A2	Yes	11/13/08	50.7	15	223	5550	G_289	MALE
+290	PAL0809	71	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N54A1	Yes	11/3/08	47.7	15	216	4750	G_290	FEMALE
+291	PAL0809	72	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N54A2	Yes	11/3/08	46.4	15.6	221	5000	G_291	MALE
+292	PAL0809	73	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N55A1	Yes	11/9/08	48.2	15.6	221	5100	G_292	MALE
+293	PAL0809	74	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N55A2	Yes	11/9/08	46.5	14.8	217	5200	G_293	FEMALE
+294	PAL0809	75	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N56A1	Yes	11/6/08	46.4	15	216	4700	G_294	FEMALE
+295	PAL0809	76	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N56A2	Yes	11/6/08	48.6	16	230	5800	G_295	MALE
+296	PAL0809	77	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N58A1	Yes	11/6/08	47.5	14.2	209	4600	G_296	FEMALE
+297	PAL0809	78	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N58A2	Yes	11/6/08	51.1	16.3	220	6000	G_297	MALE
+298	PAL0809	79	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N60A1	Yes	11/9/08	45.2	13.8	215	4750	G_298	FEMALE
+299	PAL0809	80	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N60A2	Yes	11/9/08	45.2	16.4	223	5950	G_299	MALE
+300	PAL0910	81	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N1A1	Yes	11/18/09	49.1	14.5	212	4625	G_300	FEMALE
+301	PAL0910	82	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N1A2	Yes	11/18/09	52.5	15.6	221	5450	G_301	MALE
+302	PAL0910	83	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N6A1	Yes	11/15/09	47.4	14.6	212	4725	G_302	FEMALE
+303	PAL0910	84	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N6A2	Yes	11/15/09	50	15.9	224	5350	G_303	MALE
+304	PAL0910	85	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N8A1	Yes	11/22/09	44.9	13.8	212	4750	G_304	FEMALE
+305	PAL0910	86	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N8A2	Yes	11/22/09	50.8	17.3	228	5600	G_305	MALE
+306	PAL0910	87	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N13A1	Yes	11/20/09	43.4	14.4	218	4600	G_306	FEMALE
+307	PAL0910	88	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N13A2	Yes	11/20/09	51.3	14.2	218	5300	G_307	MALE
+308	PAL0910	89	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N14A1	Yes	11/25/09	47.5	14	212	4875	G_308	FEMALE
+309	PAL0910	90	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N14A2	Yes	11/25/09	52.1	17	230	5550	G_309	MALE
+310	PAL0910	91	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N15A1	Yes	11/25/09	47.5	15	218	4950	G_310	FEMALE
+311	PAL0910	92	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N15A2	Yes	11/25/09	52.2	17.1	228	5400	G_311	MALE
+312	PAL0910	93	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N18A1	Yes	12/1/09	45.5	14.5	212	4750	G_312	FEMALE
+313	PAL0910	94	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N18A2	Yes	12/1/09	49.5	16.1	224	5650	G_313	MALE
+314	PAL0910	95	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N19A1	Yes	11/27/09	44.5	14.7	214	4850	G_314	FEMALE
+315	PAL0910	96	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N19A2	Yes	11/27/09	50.8	15.7	226	5200	G_315	MALE
+316	PAL0910	97	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N20A1	Yes	11/18/09	49.4	15.8	216	4925	G_316	MALE
+317	PAL0910	98	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N20A2	Yes	11/18/09	46.9	14.6	222	4875	G_317	FEMALE
+318	PAL0910	99	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N21A1	Yes	11/18/09	48.4	14.4	203	4625	G_318	FEMALE
+319	PAL0910	100	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N21A2	Yes	11/18/09	51.1	16.5	225	5250	G_319	MALE
+320	PAL0910	101	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N22A1	Yes	11/22/09	48.5	15	219	4850	G_320	FEMALE
+321	PAL0910	102	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N22A2	Yes	11/22/09	55.9	17	228	5600	G_321	MALE
+322	PAL0910	103	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N23A1	Yes	11/18/09	47.2	15.5	215	4975	G_322	FEMALE
+323	PAL0910	104	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N23A2	Yes	11/18/09	49.1	15	228	5500	G_323	MALE
+324	PAL0910	105	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N24A1	Yes	12/1/09	47.3	13.8	216	4725	G_324	\N
+325	PAL0910	106	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N24A2	Yes	12/1/09	46.8	16.1	215	5500	G_325	MALE
+326	PAL0910	107	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N28A1	Yes	11/10/09	41.7	14.7	210	4700	G_326	FEMALE
+327	PAL0910	108	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N28A2	Yes	11/10/09	53.4	15.8	219	5500	G_327	MALE
+328	PAL0910	109	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N29A1	Yes	11/9/09	43.3	14	208	4575	G_328	FEMALE
+329	PAL0910	110	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N29A2	Yes	11/9/09	48.1	15.1	209	5500	G_329	MALE
+330	PAL0910	111	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N32A1	Yes	11/20/09	50.5	15.2	216	5000	G_330	FEMALE
+331	PAL0910	112	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N32A2	Yes	11/20/09	49.8	15.9	229	5950	G_331	MALE
+332	PAL0910	113	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N34A1	Yes	11/27/09	43.5	15.2	213	4650	G_332	FEMALE
+333	PAL0910	114	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N34A2	Yes	11/27/09	51.5	16.3	230	5500	G_333	MALE
+334	PAL0910	115	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N35A1	Yes	11/25/09	46.2	14.1	217	4375	G_334	FEMALE
+335	PAL0910	116	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N35A2	Yes	11/25/09	55.1	16	230	5850	G_335	MALE
+336	PAL0910	117	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N36A1	Yes	12/1/09	44.5	15.7	217	4875	G_336	.
+337	PAL0910	118	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N36A2	Yes	12/1/09	48.8	16.2	222	6000	G_337	MALE
+338	PAL0910	119	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N38A1	No	12/1/09	47.2	13.7	214	4925	G_338	FEMALE
+339	PAL0910	120	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N38A2	No	12/1/09	\N	\N	\N	\N	G_339	\N
+340	PAL0910	121	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N39A1	Yes	11/22/09	46.8	14.3	215	4850	G_340	FEMALE
+341	PAL0910	122	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N39A2	Yes	11/22/09	50.4	15.7	222	5750	G_341	MALE
+342	PAL0910	123	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N43A1	Yes	11/22/09	45.2	14.8	212	5200	G_342	FEMALE
+343	PAL0910	124	Gentoo	Anvers	Biscoe	Adult, 1 Egg Stage	N43A2	Yes	11/22/09	49.9	16.1	213	5400	G_343	MALE
+\.
+
 
 --
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -3609,6 +3987,13 @@ COPY public.territories ("territoryID", "territoryDescription", "regionID") FROM
 98052	Redmond	2
 98104	Seattle	2
 \.
+
+
+--
+-- Name: ix_all_penguins_clean_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_all_penguins_clean_index ON public.all_penguins_clean USING btree (index);
 
 
 --
