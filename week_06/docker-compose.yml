@@ -10,7 +10,8 @@ services:
 
   crawler_app:
     build:
-      context: ./crawler_app/docker/
+      dockerfile: docker/Dockerfile
+      context: ./crawler_app/
     working_dir: /app/
     volumes:
     - ./crawler_app/app/:/app
