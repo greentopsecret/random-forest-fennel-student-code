@@ -1,0 +1,16 @@
+version: '3'
+services:
+
+  mongodb:
+    image: mongo:5.0.3
+    ports:
+    - 27017:27017
+
+  crawler_app:
+    build:
+      context: ./crawler_app/docker/
+    working_dir: /app/
+    volumes:
+    - ./crawler_app/app/:/app
+    depends_on:
+    - mongodb
