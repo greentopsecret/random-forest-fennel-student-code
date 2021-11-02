@@ -8,12 +8,21 @@ services:
     ports:
     - 27017:27017
 
-  crawler_app:
+  crawler-app:
     build:
       dockerfile: docker/Dockerfile
-      context: ./crawler_app/
+      context: crawler-app/
     working_dir: /app/
     volumes:
-    - ./crawler_app/app/:/app
+    - ./crawler-app/app/:/app
     depends_on:
     - mongodb
+    - ebay-mock
+
+  ebay-mock:
+    image: openjdk:11
+    working_dir: /app
+    hostname: ebay-mock
+    command: "java -jar ./karate.jar -m /app/features/search.feature -p 80"
+    volumes:
+        - ./ebay-mock/app:/app
