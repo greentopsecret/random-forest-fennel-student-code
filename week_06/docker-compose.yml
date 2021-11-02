@@ -6,7 +6,7 @@ services:
     volumes:
       - ./mongodb/data/db/:/data/db
     ports:
-    - 27017:27017
+      - 27017:27017
 
   crawler-app:
     build:
@@ -14,10 +14,15 @@ services:
       context: crawler-app/
     working_dir: /app/
     volumes:
-    - ./crawler-app/app/:/app
+      - ./crawler-app/app/:/app
     depends_on:
-    - mongodb
-    - ebay-mock
+      - mongodb
+      - ebay-mock
+    environment:
+      EBAY_HOST: http://ebay-mock
+      DB_NAME: second-hand-bikes-pipeline
+      DB_HOST: mongodb
+      DB_PORT: 27017
 
   ebay-mock:
     image: openjdk:11
@@ -26,3 +31,14 @@ services:
     command: "java -jar ./karate.jar -m /app/features/search.feature -p 80"
     volumes:
         - ./ebay-mock/app:/app
+
+  postgres:
+    image: postgres:alpine3.14
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
+      PGDATA: /data/postgres
+    volumes:
+       - ./postgres:/data/postgres
+    ports:
+      - 5432:5432

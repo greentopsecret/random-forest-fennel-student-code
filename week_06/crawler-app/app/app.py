@@ -3,7 +3,7 @@
 import argparse
 import os
 import logging
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from attrdict import AttrDict
 import mechanicalsoup
 import pymongo
@@ -95,7 +95,7 @@ class App:
 
         App.__init_logger(args.verbose)
 
-        load_dotenv()
+        # load_dotenv()
 
         self.crawler = EbayCrawler(os.getenv('EBAY_HOST'), args.cnt)
 
