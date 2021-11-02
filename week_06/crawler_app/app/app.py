@@ -49,12 +49,14 @@ class EbayCrawler:
             img = el.select('[data-imgsrc]')
             out.img = img[0].attrs['data-imgsrc'] if len(img) else None
 
+            out.internal_id = el.attrs['data-adid']
             out.link = domain + el.select('a[href^="/s-anzeige"]')[0].attrs['href']
             out.title = el.select('.text-module-begin a')[0].text.strip()
             out.desc = el.select('.aditem-main p')[0].text.strip()
             out.price = el.select('.aditem-main--middle--price')[0].text.strip()
             out.location = el.select('.aditem-main--top--left')[0].text.strip()
             out.received_at = datetime.now()
+
             results.append(out)
 
         return results
@@ -65,16 +67,23 @@ class EbayCrawler:
 
 
 class DBClient:
-    def __init__(self, dbname, host, port, username, password):
+    def __init__(self, dbname, host, port, username, password, collection):
         self.logger = logging.getLogger(self.__class__.__name__)
         port = int(port) if port else None
         self.logger.debug('Connect to MongoDB with parameters %s' % {'dbname': dbname, 'host': host, 'port': port,
                                                                      'username': username, 'password': password})
         client = pymongo.MongoClient(host=host, port=port, username=username, password=password)
         self.db = client[dbname]
+        self.collection = collection
 
     def insert(self, ads: list):
-        self.db['ads'].insert_many(ads)
+        for ad in ads:
+            result = self.db.get_collection(self.collection).update_one(
+                {'internal_id': ad.internal_id},
+                {'$set': ad},
+                upsert=True
+            )
+        # self.db['ads'].insert_many(ads)
 
 
 class App:
@@ -92,7 +101,8 @@ class App:
             os.getenv('DB_HOST'),
             os.getenv('DB_PORT'),
             os.getenv('DB_USERNAME'),
-            os.getenv('DB_PASSWORD')
+            os.getenv('DB_PASSWORD'),
+            'ebay_ads'
         )
 
     def run(self):
