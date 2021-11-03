@@ -18,15 +18,15 @@ class DbLoader:
         self.add_unique_index()
 
     def add_unique_index(self):
-        self.db[self.collection_name].create_index([('internal_id', pymongo.ASCENDING)], unique=True)
+        self.db[self.collection_name].create_index([('provider_id', pymongo.ASCENDING)], unique=True)
 
 
 if __name__ == '__main__':
     load_dotenv()
     DbLoader(
-        os.getenv('DB_NAME'),
-        os.getenv('DB_HOST'),
-        os.getenv('DB_PORT'),
+        os.getenv('MONGODB_NAME'),
+        os.getenv('MONGODB_HOST'),
+        os.getenv('MONGODB_PORT'),
         os.getenv('DB_USERNAME'),
         os.getenv('DB_PASSWORD'),
         'ebay_ads'

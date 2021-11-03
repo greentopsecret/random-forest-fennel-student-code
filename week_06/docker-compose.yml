@@ -20,9 +20,9 @@ services:
       - ebay-mock
     environment:
       EBAY_HOST: http://ebay-mock
-      DB_NAME: second-hand-bikes-pipeline
-      DB_HOST: mongodb
-      DB_PORT: 27017
+      MONGODB_NAME: second-hand-bikes-pipeline
+      MONGODB_HOST: mongodb
+      MONGODB_PORT: 27017
 
   ebay-mock:
     image: openjdk:11
@@ -35,10 +35,30 @@ services:
   postgres:
     image: postgres:alpine3.14
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
+      POSTGRESQL_USER: ${POSTGRESQL_USER:-postgres}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-pg_pass_changeme}
       PGDATA: /data/postgres
     volumes:
        - ./postgres:/data/postgres
     ports:
       - 5432:5432
+
+  transformer-app:
+    build:
+      dockerfile: docker/Dockerfile
+      context: transformer-app/
+    working_dir: /app/
+    volumes:
+      - ./transformer-app/app/:/app
+    depends_on:
+      - mongodb
+      - postgres
+    environment:
+      MONGODB_NAME: second-hand-bikes-pipeline
+      MONGODB_HOST: mongodb
+      MONGODB_PORT: 27017
+      POSTGRESQL_DBNAME: second-hand-bikes-pipeline
+      POSTGRESQL_HOST: postgres
+      POSTGRESQL_PORT: 5432
+      POSTGRESQL_USER: ${POSTGRESQL_USER:-postgres}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-pg_pass_changeme}

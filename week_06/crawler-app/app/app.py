@@ -52,7 +52,7 @@ class EbayCrawler:
             img = el.select('[data-imgsrc]')
             out.img = img[0].attrs['data-imgsrc'] if len(img) else None
 
-            out.internal_id = el.attrs['data-adid']
+            out.provider_id = el.attrs['data-adid']
             out.link = self.host + '/' + el.select('a[href^="/s-anzeige"]')[0].attrs['href']
             out.title = el.select('.text-module-begin a')[0].text.strip()
             out.desc = el.select('.aditem-main p')[0].text.strip()
@@ -82,7 +82,7 @@ class DBClient:
         for ad in ads:
             # TODO: Check update_many
             self.db.get_collection(self.collection).update_one(
-                {'internal_id': ad.internal_id},
+                {'provider_id': ad.provider_id},
                 {'$set': ad},
                 upsert=True
             )
@@ -100,9 +100,9 @@ class App:
         self.crawler = EbayCrawler(os.getenv('EBAY_HOST'), args.cnt)
 
         self.db_client = DBClient(
-            os.getenv('DB_NAME'),
-            os.getenv('DB_HOST'),
-            os.getenv('DB_PORT'),
+            os.getenv('MONGODB_NAME'),
+            os.getenv('MONGODB_HOST'),
+            os.getenv('MONGODB_PORT'),
             os.getenv('DB_USERNAME'),
             os.getenv('DB_PASSWORD'),
             'ebay_ads'
