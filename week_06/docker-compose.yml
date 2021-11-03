@@ -29,17 +29,20 @@ services:
     working_dir: /app
     hostname: ebay-mock
     command: "java -jar ./karate.jar -m /app/features/search.feature -p 80"
+    ports:
+      - 8080:80
     volumes:
-        - ./ebay-mock/app:/app
+      - ./ebay-mock/app:/app
 
   postgres:
     image: postgres:alpine3.14
     environment:
-      POSTGRESQL_USER: ${POSTGRESQL_USER:-postgres}
-      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-pg_pass_changeme}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
       PGDATA: /data/postgres
     volumes:
-       - ./postgres:/data/postgres
+      - ./postgres:/data/postgres
     ports:
       - 5432:5432
 
@@ -57,8 +60,8 @@ services:
       MONGODB_NAME: second-hand-bikes-pipeline
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
-      POSTGRESQL_DBNAME: second-hand-bikes-pipeline
-      POSTGRESQL_HOST: postgres
-      POSTGRESQL_PORT: 5432
-      POSTGRESQL_USER: ${POSTGRESQL_USER:-postgres}
-      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-pg_pass_changeme}
+      POSTGRES_DBNAME: ${POSTGRES_DBNAME}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}

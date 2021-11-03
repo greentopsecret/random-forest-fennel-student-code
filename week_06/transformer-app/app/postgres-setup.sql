@@ -1,4 +1,3 @@
-drop table if exists ads;
 create table ads
 (
     index         serial

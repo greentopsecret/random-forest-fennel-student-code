@@ -5,7 +5,6 @@ import pymongo
 import logging
 import os
 import re
-import pandas as pd
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
 from sqlalchemy import create_engine
@@ -30,7 +29,7 @@ class MongoDBClient:
 
 class PostgreSQLClient:
     def __init__(self, host, port, user, password, database):
-        port = int(port) if port else None
+        port = int(port)
         uri = f'postgresql://{user}:{password}@{host}:{port}/{database}'
         self.engine = create_engine(uri, echo=False)
         pass
@@ -71,6 +70,9 @@ class EbayAdsTransformer:
             ad['price'] = int(price) if price else 0
             ad['provider'] = EbayAdsTransformer.PROVIDER_NAME
             ad['incoming_id'] = str(ad['_id'])
+
+            # TODO: add transformed_at
+
             del ad['_id']
 
         return ads
@@ -81,6 +83,9 @@ class App:
         args = App.__get_args()
 
         App.__load_dotenv(args.env)
+        App.__init_logger(args.verbose)
+
+        self.logger = logging.getLogger(self.__class__.__name__)
 
         self.data_transformer = EbayAdsTransformer()
         self.mongodb_client = MongoDBClient(
@@ -92,18 +97,28 @@ class App:
             'ebay_ads'
         )
         self.posgresql_client = PostgreSQLClient(
-            os.getenv('POSTGRESQL_HOST'),
-            os.getenv('POSTGRESQL_PORT'),
-            os.getenv('POSTGRESQL_USER'),
-            os.getenv('POSTGRESQL_PASSWORD'),
-            os.getenv('POSTGRESQL_DBNAME')
+            os.getenv('POSTGRES_HOST'),
+            os.getenv('POSTGRES_PORT'),
+            os.getenv('POSTGRES_USER'),
+            os.getenv('POSTGRES_PASSWORD'),
+            os.getenv('POSTGRES_DBNAME')
         )
 
     def run(self):
-        last_ad = self.posgresql_client.find_last_ad() # TODO: add a property with the last_ad
+        self.logger.info('Start')
+
+        last_ad = self.posgresql_client.find_last_ad()  # TODO: add a property with the last_ad
+
+        self.logger.debug('Found last_ad: %s' % str(last_ad))
+
         new_ads = self.mongodb_client.find_younger_than(last_ad)
+
+        self.logger.debug('Found %d new ads' % len(new_ads))
+
         new_ads = self.data_transformer.transform(new_ads)
         self.posgresql_client.store(new_ads)
+
+        self.logger.info('End. Transformed and loaded %d new ads.' % len(new_ads))
 
     @staticmethod
     def __get_args() -> argparse.Namespace:
@@ -126,9 +141,29 @@ class App:
             filename = '%s/.env.%s' % (os.path.dirname(os.path.realpath(__file__)), env)
             load_dotenv(dotenv_path=filename)
 
+    @staticmethod
+    def __init_logger(verbosity: int):
+        _format = '%(asctime)s :: %(levelname)s :: %(name)s :: %(message)s'
+        if verbosity == 1:
+            level = logging.INFO
+        elif verbosity > 1:
+            level = logging.DEBUG
+        else:
+            level = logging.WARNING
+
+        logging.basicConfig(level=level, format=_format)
+
 
 if __name__ == '__main__':
-    schedule.every(2).to(5).seconds.do(App().run)
+    # App().run()
+    # sys.exit(1)
+
+    app = App()
+    app.run()
+
+    interval = 3  # TODO: set up via arguments
+    schedule.every(interval * 60).seconds.do(app.run)
+
     while True:
         schedule.run_pending()
         time.sleep(5)
