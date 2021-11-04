@@ -1,4 +1,5 @@
 import argparse
+from datetime import datetime
 import schedule
 import time
 import pymongo
@@ -22,7 +23,7 @@ class MongoDBClient:
         client = pymongo.MongoClient(host=host, port=port, username=username, password=password)
         self.collection = client[dbname].get_collection(collection)
 
-    def find_younger_than(self, last_ad) -> list:
+    def find_newer_than(self, last_ad) -> list:
         filter_ = {'_id': {'$gt': ObjectId(last_ad['incoming_id'])}} if last_ad else {}
         return list(self.collection.find(filter_))
 
@@ -70,6 +71,7 @@ class EbayAdsTransformer:
             ad['price'] = int(price) if price else 0
             ad['provider'] = EbayAdsTransformer.PROVIDER_NAME
             ad['incoming_id'] = str(ad['_id'])
+            ad['transformed_at'] = datetime.now()
 
             # TODO: add transformed_at
 
@@ -111,7 +113,7 @@ class App:
 
         self.logger.debug('Found last_ad: %s' % str(last_ad))
 
-        new_ads = self.mongodb_client.find_younger_than(last_ad)
+        new_ads = self.mongodb_client.find_newer_than(last_ad)
 
         self.logger.debug('Found %d new ads' % len(new_ads))
 
