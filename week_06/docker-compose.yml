@@ -19,7 +19,8 @@ services:
       - mongodb
       - ebay-mock
     environment:
-      EBAY_HOST: http://ebay-mock
+#      EBAY_HOST: http://ebay-mock/
+      EBAY_HOST: https://www.ebay-kleinanzeigen.de/
       MONGODB_NAME: second-hand-bikes-pipeline
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
@@ -27,7 +28,7 @@ services:
   ebay-mock:
     image: openjdk:11
     working_dir: /app
-    hostname: ebay-mock
+#    hostname: ebay-mock
     command: "java -jar ./karate.jar -m /app/features/search.feature -p 80"
     ports:
       - 8080:80
@@ -60,6 +61,22 @@ services:
       MONGODB_NAME: second-hand-bikes-pipeline
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
+      POSTGRES_DBNAME: ${POSTGRES_DBNAME}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
+
+  notifier-app:
+    build:
+      dockerfile: docker/Dockerfile
+      context: transformer-app/
+    working_dir: /app/
+    volumes:
+      - ./notifier-app/app/:/app
+    depends_on:
+      - postgres
+    environment:
       POSTGRES_DBNAME: ${POSTGRES_DBNAME}
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432

@@ -1,6 +1,7 @@
 import argparse
 import os
 import logging
+import random
 import sys
 
 from attrdict import AttrDict
@@ -18,7 +19,7 @@ class EbayCrawler:
 
     def __init__(self, host, cnt):
         self.cnt = cnt
-        self.host = host
+        self.host = host.strip('/')
         self.logger = logging.getLogger(self.__class__.__name__)
         self.browser = mechanicalsoup.Browser(
             soup_config={'features': 'lxml'},
@@ -31,9 +32,9 @@ class EbayCrawler:
 
         result = []
         for page in range(1, self.cnt + 1):
-
             for ad in self.__get_page_ads(page):
                 result.append(ad)
+            time.sleep(random.randint(3, 10))
 
         self.logger.debug('Found %d ads' % len(result))
 
@@ -62,7 +63,7 @@ class EbayCrawler:
             out.img = img[0].attrs['data-imgsrc'] if len(img) else None
 
             out.provider_id = el.attrs['data-adid']
-            out.link = self.host + '/' + el.select('a[href^="/s-anzeige"]')[0].attrs['href']
+            out.link = self.host + el.select('a[href^="/s-anzeige"]')[0].attrs['href']
             out.title = el.select('.text-module-begin a')[0].text.strip()
             out.desc = el.select('.aditem-main p')[0].text.strip()
             out.price = el.select('.aditem-main--middle--price')[0].text.strip()
@@ -167,11 +168,14 @@ if __name__ == '__main__':
     app = App()
     app.run()
 
-    min_interval = 5  # TODO: set up via arguments
-    max_interval = 10
+    min_interval = 2  # TODO: set up via arguments
+    max_interval = 4
     schedule.every(min_interval * 60).to(max_interval * 60).seconds.do(app.run)
     # schedule.every(2).to(5).seconds.do(App().run)
 
     while True:
-        schedule.run_pending()
-        time.sleep(5)
+        try:
+            schedule.run_pending()
+        except Exception as e:
+            logging.error(str(e))
+            time.sleep(5)

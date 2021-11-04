@@ -136,3 +136,4 @@ dmypy.json
 .csv
 
 .idea/
+data/aclImdb/

@@ -7,6 +7,9 @@ crawler_bash:
 transformer_bash:
 	docker-compose run transformer-app /bin/bash
 
+notifier_bash:
+	docker-compose run notifier-app /bin/bash
+
 mock_bash:
 	docker-compose run ebay-mock /bin/bash
 
@@ -22,3 +25,6 @@ crawler_running:
 
 transformer_running:
 	docker-compose run transformer-app python /app/app.py -vv
+
+notifier_running:
+	docker-compose run notifier-app python /app/app.py -vv
