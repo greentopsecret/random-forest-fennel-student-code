@@ -15,7 +15,7 @@ from http.client import HTTPConnection
 
 
 class EbayCrawler:
-    URL_TEMPLATE = '%s/s-fahrraeder/anzeige:angebote/seite:%d/fahrrad/k0c217'
+    URL_TEMPLATE = '%s/s-fahrraeder/anzeige:angebote/seite:%d/fahrrad/c217'
 
     def __init__(self, host, cnt):
         self.cnt = cnt

@@ -82,3 +82,4 @@ services:
       POSTGRES_PORT: 5432
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}

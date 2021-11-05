@@ -12,6 +12,7 @@ create table ads
     price_comment varchar(25),
     price_raw     varchar(25),
     location      varchar(255),
+    location_zip  varchar(10),
     received_at   timestamp not null,
     transformed_at timestamp default now() not null
 );

@@ -23,13 +23,13 @@ class SlackNotifier:
 
     def _prepare_notification(self, ad):
         text = '''
-        *New second hand bike on ebay 👻*
-        {title}   
-   
-        {desc}   
-        {price_raw}   
-        {location}
-        {link}   '''.format(**ad)
+New second hand bike on ebay 👻
+*{title}*   
+
+{price_raw}   
+{location}
+{link}   
+        '''.format(**ad)
 
         return {
             'blocks': [
@@ -42,7 +42,7 @@ class SlackNotifier:
                     'accessory': {
                         'type': 'image',
                         'image_url': ad['img'],
-                        'alt_text': ''
+                        'alt_text': ad['desc']
                     }
                 }
             ]
@@ -82,9 +82,10 @@ class App:
 
             if new_ads:
                 for ad in new_ads:
-                    self.notifier.send_notification(ad)
+                    if len(ad['location_zip']) and 10115 <= int(ad['location_zip']) <= 14199:  # send notifications only for Berlin ads
+                        self.notifier.send_notification(ad)
+                        time.sleep(30)  # TODO: configure via args
                     self.store_last_sent_ad(ad['index'])
-                    time.sleep(30)  # TODO: configure via args
         else:
             self.logger.debug('Last ad was not found')
 
@@ -109,7 +110,7 @@ class App:
         _format = '%(asctime)s :: %(levelname)s :: %(name)s :: %(message)s'
         if verbosity == 1:
             level = logging.INFO
-        elif verbosity > 2:
+        elif verbosity > 1:
             level = logging.DEBUG
         else:
             level = logging.WARNING

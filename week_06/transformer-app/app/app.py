@@ -72,8 +72,7 @@ class EbayAdsTransformer:
             ad['provider'] = EbayAdsTransformer.PROVIDER_NAME
             ad['incoming_id'] = str(ad['_id'])
             ad['transformed_at'] = datetime.now()
-
-            # TODO: add transformed_at
+            ad['location_zip'] = re.sub(r'[^\d]', '', ad['location'])
 
             del ad['_id']
 
@@ -157,8 +156,6 @@ class App:
 
 
 if __name__ == '__main__':
-    # App().run()
-    # sys.exit(1)
 
     app = App()
     app.run()
