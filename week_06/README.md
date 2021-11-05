@@ -11,19 +11,23 @@ This pipeline monitors ebay-kleinanzeige.de website for second-hand bikes ads. F
 ### Installation
 1. 
 ```shell
-cd {project root}
+# from the project folder 
 cp .env.dist .env
 ```
-
 2. set ENV variables values in `.env` file
 3. Prepare databases
 ```shell
 make mongodb_setup
 make postgres_setup
 ```
-5. Run applications
+4. Run applications
 ```shell
+# in terminal 1
 make crawler_running
+
+# in terminal 2
 make transformer_running
+
+# in terminal 3
 make notifier_running
 ```

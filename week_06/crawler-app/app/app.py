@@ -2,7 +2,6 @@ import argparse
 import os
 import logging
 import random
-import sys
 
 from attrdict import AttrDict
 import mechanicalsoup
@@ -15,7 +14,7 @@ from http.client import HTTPConnection
 
 
 class EbayCrawler:
-    URL_TEMPLATE = '%s/s-fahrraeder/anzeige:angebote/seite:%d/fahrrad/c217'
+    URL_TEMPLATE = '%s/s-fahrraeder/berlin/preis:300:/seite:%d/fahrrad/k0c217l3331'
 
     def __init__(self, host, cnt):
         self.cnt = cnt
@@ -105,8 +104,6 @@ class App:
         App.__load_dotenv(args.env)
         App.__init_logger(args.verbose)
 
-        # load_dotenv()
-
         self.crawler = EbayCrawler(os.getenv('EBAY_HOST'), args.cnt)
 
         self.db_client = DBClient(
@@ -162,16 +159,12 @@ class App:
 
 if __name__ == '__main__':
 
-    # App().run()
-    # sys.exit(1)
-
     app = App()
     app.run()
 
     min_interval = 2  # TODO: set up via arguments
     max_interval = 4
     schedule.every(min_interval * 60).to(max_interval * 60).seconds.do(app.run)
-    # schedule.every(2).to(5).seconds.do(App().run)
 
     while True:
         try:

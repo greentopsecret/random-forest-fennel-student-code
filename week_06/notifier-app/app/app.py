@@ -1,3 +1,5 @@
+import re
+
 import requests
 from dotenv import load_dotenv
 import schedule
@@ -15,6 +17,7 @@ class SlackNotifier:
         self.logger = logging.getLogger(self.__class__.__name__)
 
     def send_notification(self, ad):
+        # self.logger.debug('Send notification {}'.format(ad))
         response = requests.post(url=self.webhook_url, json=self._prepare_notification(ad))
         if response.status_code == 200:
             self.logger.info('Notification about ad#%d has been sent' % ad['index'])
@@ -82,9 +85,12 @@ class App:
 
             if new_ads:
                 for ad in new_ads:
-                    if len(ad['location_zip']) and 10115 <= int(ad['location_zip']) <= 14199:  # send notifications only for Berlin ads
+                    white_list = ['fixie', 'Singlespeed', 'Carbon', 'Bianchi', 'Gravelbike', 'rose', 'canyon', 'cube']
+                    p = re.compile('(' + '|'.join(white_list) + ')', re.IGNORECASE)
+                    if re.search(p, ad['title']) or ad['price'] > 700:
                         self.notifier.send_notification(ad)
                         time.sleep(30)  # TODO: configure via args
+                    # self.logger.debug('store last ad {}'.format(ad))
                     self.store_last_sent_ad(ad['index'])
         else:
             self.logger.debug('Last ad was not found')
