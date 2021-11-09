@@ -86,20 +86,28 @@ class DBClient:
         client = pymongo.MongoClient(host=host, port=port, username=username, password=password)
         self.collection = client[dbname].get_collection(collection_name)
 
-    def insert(self, ads: list):
+    def insert(self, ads: list) -> int:
+        cnt = 0
         for ad in ads:
             # TODO: Check update_many
-            self.collection.update_one(
+            result = self.collection.update_one(
                 {'provider_id': ad.provider_id},
                 {'$set': ad},
                 upsert=True
             )
+            if not result.raw_result['updatedExisting']:
+                cnt += 1
+                # self.logger.debug(result.modified_count)
+                # self.logger.debug(result.acknowledged)
+                # self.logger.debug(result.upserted_id)
+
+        self.logger.debug('Number of inserted documents %d' % cnt)
 
 
 class App:
 
     def __init__(self):
-        args = self.__get_args()
+        args = App.__get_args()
 
         App.__load_dotenv(args.env)
         App.__init_logger(args.verbose)
