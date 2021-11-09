@@ -31,6 +31,12 @@ make transformer_running
 # in terminal 3
 make notifier_running
 ```
+5. Mock ebay website [optional]
+Download `karate.jar` from https://github.com/karatelabs/karate/releases (Assets).
+Rename it as `ebay-mock/app/karate.jar`
+```shell
+# TODO: add command 
+```
 
 ## Crawler app
 The app scrapes a website and stores data to NoSQL (MongoDB) database.
@@ -44,3 +50,6 @@ To ensure that none ads are pulled from MongoDB twice there is a select query th
 Incrementally pulls new ads from PostgreSQL and send them to slack.
 It caches the last sent ad in a text file.
 It also filters ads by title and price.
+
+## mock ebay website
+TODO: add description
