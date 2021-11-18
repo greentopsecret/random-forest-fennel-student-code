@@ -1,25 +1,27 @@
-from customer import Customer
 from supermarket import Supermarket
 from clock import Clock
+from customer_factory import CustomerFactory
 import pandas as pd
+
+
+def customer_dist(clock: Clock):
+    return 1
+
 
 if __name__ == '__main__':
     matrix = pd.read_csv('./output/transition_matrix.csv', index_col=0, sep=';')
 
     clock = Clock(current_datetime='2021-11-18 09:00:00')
 
-    customer1 = Customer(1, Supermarket.get_first_section(), clock)
-    customer2 = Customer(2, Supermarket.get_first_section(), clock)
-    customer3 = Customer(3, Supermarket.get_first_section(), clock)
-
     supermarket = Supermarket(clock, matrix.to_dict(orient='index'))
-    supermarket.add_customer(customer1)
-    supermarket.add_customer(customer2)
-    supermarket.add_customer(customer3)
+    customer_factory = CustomerFactory(clock, customer_dist)
 
     for i in range(10):
-        supermarket.next_minute()
+        customers = customer_factory.build_customer(Supermarket.get_first_section())
+        for customer in customers:
+            supermarket.add_customer(customer)
 
+        supermarket.next_minute()
 
     # df = pd.DataFrame(data=output, columns=Supermarket.transitions_columns())
     # df.to_csv('./output/transitions.csv')
