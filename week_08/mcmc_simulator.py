@@ -4,7 +4,7 @@ from clock import Clock
 import pandas as pd
 
 if __name__ == '__main__':
-    matrix = pd.read_csv('./output/transition_matrix.csv')
+    matrix = pd.read_csv('./output/transition_matrix.csv', index_col=0, sep=';')
 
     clock = Clock(current_datetime='2021-11-18 09:00:00')
 
@@ -20,6 +20,11 @@ if __name__ == '__main__':
     for i in range(10):
         supermarket.next_minute()
 
-    output = supermarket.get_customer_transitions_csv()
-    pd.DataFrame(data=output, columns=Supermarket.transitions_columns())
-    output.to_csv('./output/transitions.csv')
+
+    # df = pd.DataFrame(data=output, columns=Supermarket.transitions_columns())
+    # df.to_csv('./output/transitions.csv')
+
+    output = supermarket.get_customer_transitions_csv(sep=';')
+    f = open('./output/simulation.csv', 'w')
+    f.write(output)
+    f.close()

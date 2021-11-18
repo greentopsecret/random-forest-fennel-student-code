@@ -41,4 +41,4 @@ class Customer:
 
     @staticmethod
     def get_next_location(probabilities: dict) -> str:
-        np.random.choice(probabilities.keys, p=probabilities.values())
+        return np.random.choice(list(probabilities.keys()), size=1, p=list(probabilities.values()))[0]

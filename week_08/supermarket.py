@@ -69,8 +69,8 @@ class Supermarket:
 
             # handle location changing
             if next_location != current_location:
+                self._store_transition(customer)
                 customer.set_location(next_location)
-                self._store_transition(customer, self.clock)
                 if next_location == Supermarket.get_last_section():
                     customer.deactivate()
 
@@ -91,11 +91,8 @@ class Supermarket:
     def _get_location_probabilities(self, current_location: str) -> dict:
         return self.probabilities_matrix[current_location]
 
+    # TODO: return list of transitions instead of csv
     def get_customer_transitions_csv(self, sep: str = ';') -> str:
-        title = sep.join(self.probabilities_matrix.keys())
+        title = sep.join(['timestamp', 'customer_no', 'location'])
         lines = [title] + self.transitions
-        return "\t".join(lines)
-
-    @classmethod
-    def transitions_columns(cls) -> tuple:
-        return 'timestamp', 'customer_no', 'location'
+        return "\n".join(lines)
