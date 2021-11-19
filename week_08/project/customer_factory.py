@@ -16,7 +16,7 @@ class CustomerFactory:
 
     def build_customer(self, location: str) -> list[Customer]:
         cnt = self._callback(self._clock)
-        for i in range(cnt):
+        for _ in range(cnt):
             self._last_customer_no += 1
             yield Customer(self._last_customer_no, location, self._clock)
 

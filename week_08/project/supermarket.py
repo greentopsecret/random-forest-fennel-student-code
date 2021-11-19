@@ -34,8 +34,8 @@ class Supermarket:
             current_location = customer.get_location()
 
             # get next location
-            p = self._get_location_probabilities(current_location)
-            next_location = Customer.get_next_location(p)
+            probabilities = self._get_location_probabilities(current_location)
+            next_location = Customer.get_next_location(probabilities)
 
             # handle location changing
             if next_location != current_location:

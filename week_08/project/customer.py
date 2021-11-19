@@ -19,7 +19,7 @@ class Customer:
         self._clock = clock
 
     def __repr__(self):
-        return "%s;%d;%s" % (self._clock, self._customer_no, self._location)
+        return ";".join([str(self._clock), str(self._customer_no), self._location])
 
     def set_location(self, location: str):
         self._location = location
@@ -35,4 +35,8 @@ class Customer:
 
     @staticmethod
     def get_next_location(probabilities: dict) -> str:
-        return np.random.choice(list(probabilities.keys()), size=1, p=list(probabilities.values()))[0]
+        return np.random.choice(
+            list(probabilities.keys()),
+            size=1,
+            p=list(probabilities.values())
+        )[0]

@@ -1,10 +1,11 @@
+from typing import Callable
 from supermarket import Supermarket
 from clock import Clock
 from customer_factory import CustomerFactory
 import pandas as pd
-from typing import Callable
 
 
+# TODO: replace class with a simple function
 class McmcSimulator:
     @staticmethod
     def run(
@@ -28,9 +29,9 @@ class McmcSimulator:
             supermarket.next_minute()
             now.increment()
 
-        f = open(output_file, 'w')
-        f.write(supermarket.get_customer_transitions_csv(sep=';'))
-        f.close()
+        with open(output_file, 'w', encoding='UTF-8') as file:
+            file.write(supermarket.get_customer_transitions_csv(sep=';'))
+            file.close()
 
 
 if __name__ == '__main__':
