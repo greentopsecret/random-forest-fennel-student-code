@@ -22,3 +22,6 @@ class Clock:
 
     def __repr__(self) -> str:
         return self.dt.strftime(Clock.FORMAT)
+
+    def less_than(self, dt2):
+        return self.dt < dt2.dt

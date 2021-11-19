@@ -1,22 +1,20 @@
 from customer import Customer
-from clock import Clock
 
 
 class Supermarket:
-    """manages multiple Customer instances that are currently in the market.
+    """
+    manages multiple Customer instances that are currently in the market.
     """
     SECTION_FIRST = 'entrance'
     SECTION_LAST = 'checkout'
 
     transitions: list[str]
-    clock: Clock
     minutes: int
     customers: list[Customer]
     probabilities_matrix: dict
 
-    def __init__(self, clock: Clock, probabilities_matrix: dict):
+    def __init__(self, probabilities_matrix: dict):
         self.customers = []
-        self.clock = clock
         self.transitions = []
         self.probabilities_matrix = probabilities_matrix
 
@@ -47,7 +45,6 @@ class Supermarket:
                     customer.deactivate()
 
         self._remove_inactive_customers()
-        self.clock.increment()
 
     def add_customer(self, customer: Customer):
         self.customers.append(customer)
