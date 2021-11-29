@@ -19,7 +19,7 @@ class Customer:
         self._clock = clock
 
     def __repr__(self):
-        return ";".join([str(self._clock), str(self._customer_no), self._location])
+        return f"{self._clock};{self._customer_no};{self._location}"
 
     def set_location(self, location: str):
         self._location = location
