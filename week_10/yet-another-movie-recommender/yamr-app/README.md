@@ -67,7 +67,7 @@ The SAM CLI reads the application template to determine the API's routes and the
 
 ```yaml
       Events:
-        HelloWorld:
+        RecommendationRequest:
           Type: Api
           Properties:
             Path: /recommend
