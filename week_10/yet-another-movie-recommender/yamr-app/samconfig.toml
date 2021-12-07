@@ -7,4 +7,4 @@ s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-pc34n3bbvz9n"
 s3_prefix = "yamr-app"
 region = "eu-central-1"
 capabilities = "CAPABILITY_IAM"
-image_repositories = ["HelloWorldFunction=536200232045.dkr.ecr.eu-central-1.amazonaws.com/yamrapp088ac99e/helloworldfunction19d43fc4repo"]
+image_repositories = ["YAMRAppFunction=536200232045.dkr.ecr.eu-central-1.amazonaws.com/yamrapp088ac99e/helloworldfunction19d43fc4repo"]
