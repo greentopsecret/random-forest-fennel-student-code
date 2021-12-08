@@ -10,7 +10,7 @@ def apigw_event():
     """ Generates API GW Event"""
 
     return {
-        "body": '{ "test": "body"}',
+        "body": "{\"reference_movies\":[\"Into the wild\",\"Forrest Gump\",\"Pulp Fiction\",\"Lock stock and two smoking barrels\",\"City of God\",\"Once\"]}",
         "resource": "/{proxy+}",
         "requestContext": {
             "resourceId": "123456",
@@ -62,11 +62,11 @@ def apigw_event():
     }
 
 
-def test_lambda_handler(apigw_event, mocker):
+def test_lambda_handler(apigw_event):
 
     ret = app.lambda_handler(apigw_event, "")
     data = json.loads(ret["body"])
 
     assert ret["statusCode"] == 200
-    assert "message" in ret["body"]
-    assert data["message"] == "hello world"
+    assert "recommendations" in ret["body"]
+    assert data["recommendations"] == ['toy story', 'jumanji', 'grumpier old men']
