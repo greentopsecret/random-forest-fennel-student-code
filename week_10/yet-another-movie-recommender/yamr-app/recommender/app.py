@@ -23,8 +23,8 @@ def find_users_id_by_movies(movies, ratings):
     m['cnt'] = 1
     s = m.groupby(by='userId')['cnt'].sum()
 
-    # take only users who watched more than 30% of movies from the list
-    return s[s.sort_values() > len(movies) * 0.3].index.tolist()
+    # take only users who watched more than 40% of movies from the list
+    return s[s.sort_values() > len(movies) * 0.4].index.tolist()
 
 
 def filter_ratings(reference_users_id, input_movies, ratings):
@@ -64,7 +64,7 @@ def get_recommendations(input_movies: list):
     # TODO: use heapq
     cosim_reference_users = pd.DataFrame(cosim_dict.values(), index=cosim_dict.keys(), columns=['cosim'])
     cosim_reference_users.sort_values(inplace=True, by='cosim')
-    reference_users_id = cosim_reference_users.tail(20).index.tolist()
+    reference_users_id = cosim_reference_users.tail(10).index.tolist()
 
     # prepare candidates
     # movies that are not in user input and that have the biggest amount of positive ratings from reference users
@@ -74,7 +74,7 @@ def get_recommendations(input_movies: list):
         agg({'userId': 'count'}). \
         rename(columns={'userId': 'numberOfReviews'}). \
         sort_values('numberOfReviews'). \
-        tail(20). \
+        tail(10). \
         index.tolist()
 
     # prediction: predict ratings for candidate movies
@@ -128,6 +128,14 @@ def lambda_handler(event, context):
 
     logger = logging.getLogger(__name__)
     logger.debug('Got an event: {}' % event)
+
+    if 'body' not in event.keys():
+        return {
+            "statusCode": 200,
+            "body": json.dumps({
+                "message": 'No "body" provided'
+            }),
+        }
 
     body = json.loads(event['body'])
     reference_movies = body['reference_movies']

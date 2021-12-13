@@ -19,8 +19,8 @@ services:
       - mongodb
       - ebay-mock
     environment:
-#      EBAY_HOST: http://ebay-mock/
-      EBAY_HOST: https://www.ebay-kleinanzeigen.de/
+      EBAY_HOST: http://ebay-mock/
+#      EBAY_HOST: https://www.ebay-kleinanzeigen.de/
       MONGODB_NAME: second-hand-bikes-pipeline
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
