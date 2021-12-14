@@ -37,7 +37,7 @@ services:
 ##      - ./ebay-mock/app:/app
 
   postgres:
-    image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-postgres-repository
+    image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-postgres-repository:latest
     environment:
       PGDATA: /data/postgres
       PGPASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
@@ -51,7 +51,7 @@ services:
       - 5432:5432
 
   transformer-app:
-    image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-transformer-repository
+    image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-transformer-repository:latest
 #    build:
 #      dockerfile: ../docker/Dockerfile
 #      context: ../transformer-app/
@@ -66,13 +66,13 @@ services:
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
       POSTGRES_DBNAME: ${POSTGRES_DBNAME}
-      POSTGRES_HOST: postgres
+      POSTGRES_HOST: ${POSTGRES_HOST:-postgres}
       POSTGRES_PORT: 5432
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
 
   notifier-app:
-    image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-notifier-repository
+    image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-notifier-repository:latest
 #    build:
 #      dockerfile: ../docker/Dockerfile
 #      context: ../notifier-app/
@@ -83,11 +83,10 @@ services:
       - postgres
     environment:
       POSTGRES_DBNAME: ${POSTGRES_DBNAME}
-      POSTGRES_HOST: postgres
+      POSTGRES_HOST: ${POSTGRES_HOST:-postgres}
       POSTGRES_PORT: 5432
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
-      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
 
 volumes:
   efs-immobot-mongodb-volume:

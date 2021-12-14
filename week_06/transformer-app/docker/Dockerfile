@@ -1,8 +1,11 @@
 FROM python:3.9
+
+ARG POSTGRES_USER
+ARG POSTGRES_DBNAME
+
 WORKDIR /app
-COPY ../app/requirements.txt /app
+COPY ../app /app
+
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# TODO: load dump from postgres-setup.sql
-
-#CMD ["python", "hello.py"]
+ENTRYPOINT ["python", "/app/app.py", "-vv"]

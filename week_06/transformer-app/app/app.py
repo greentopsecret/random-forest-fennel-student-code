@@ -30,10 +30,16 @@ class MongoDBClient:
 
 class PostgreSQLClient:
     def __init__(self, host, port, user, password, database):
+
+        # init logger
+        self.logger = logging.getLogger(self.__class__.__name__)
+
+        # init connection
         port = int(port)
         uri = f'postgresql://{user}:{password}@{host}:{port}/{database}'
+        # self.logger.debug('Connecting to %s' % uri)
         self.engine = create_engine(uri, echo=False)
-        pass
+        self.logger.debug('Done')
 
     def find_last_ad(self) -> dict:
         sql = 'SELECT incoming_id FROM ads ORDER BY index DESC LIMIT 1'

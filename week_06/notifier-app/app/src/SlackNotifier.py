@@ -1,3 +1,7 @@
+import logging
+import requests
+
+
 class SlackNotifier:
     def __init__(self, webhook_url):
         self.webhook_url = webhook_url
