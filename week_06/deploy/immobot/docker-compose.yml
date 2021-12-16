@@ -10,57 +10,32 @@ services:
 
   crawler-app:
     image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-crawler-repository:latest
-#    build:
-#      dockerfile: ../docker/Dockerfile
-#      context: ../crawler-app/
     working_dir: /app/
-#    volumes:
-#      - ./crawler-app/app/:/app
     depends_on:
       - mongodb
-#      - ebay-mock
     environment:
-#      EBAY_HOST: http://ebay-mock/
       EBAY_HOST: https://www.ebay-kleinanzeigen.de/
       MONGODB_NAME: immobot-pipeline
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
 
-#  ebay-mock:
-#    image: openjdk:11
-#    working_dir: /app
-##    hostname: ebay-mock
-#    command: "java -jar ./karate.jar -m /app/features/search.feature -p 80"
-##    ports:
-##      - 8080:80
-##    volumes:
-##      - ./ebay-mock/app:/app
-
-  postgres:
-    image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-postgres-repository:latest
-    environment:
-      PGDATA: /data/postgres
-      PGPASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
-      POSTGRES_DB: ${POSTGRES_DBNAME}
-
-#    volumes:
-#      - ./postgres:/data/postgres
-    ports:
-      - 5432:5432
+#  database:
+#    image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-postgres-repository:latest
+#    environment:
+#      PGDATA: /data/postgres
+#      PGPASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
+#      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
+#      POSTGRES_DB: ${POSTGRES_DBNAME}
+#    ports:
+#      - 5432:5432
 
   transformer-app:
     image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-transformer-repository:latest
-#    build:
-#      dockerfile: ../docker/Dockerfile
-#      context: ../transformer-app/
     working_dir: /app/
-#    volumes:
-#      - ./transformer-app/app/:/app
     depends_on:
       - mongodb
-      - postgres
+#      - postgres
     environment:
       MONGODB_NAME: immobot-pipeline
       MONGODB_HOST: mongodb
@@ -73,14 +48,9 @@ services:
 
   notifier-app:
     image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-notifier-repository:latest
-#    build:
-#      dockerfile: ../docker/Dockerfile
-#      context: ../notifier-app/
     working_dir: /app/
-#    volumes:
-#      - ./notifier-app/app/:/app
-    depends_on:
-      - postgres
+#    depends_on:
+#      - postgres
     environment:
       POSTGRES_DBNAME: ${POSTGRES_DBNAME}
       POSTGRES_HOST: ${POSTGRES_HOST:-postgres}
