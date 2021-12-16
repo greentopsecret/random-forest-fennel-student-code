@@ -46,9 +46,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_pass_changeme}
       POSTGRES_DB: ${POSTGRES_DBNAME}
-
-#    volumes:
-#      - ./data/postgres:/data/postgres
+    volumes:
+      - ./data/postgres:/data/postgres
     ports:
       - 5432:5432
 

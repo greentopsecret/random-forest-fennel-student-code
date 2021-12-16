@@ -132,7 +132,7 @@ class App:
         parser = argparse.ArgumentParser(description='Transform raw data (from MongoDB) to relational DB (PostgreSQL)',
                                          formatter_class=argparse.ArgumentDefaultsHelpFormatter)
         parser.add_argument('-e', '--env',
-                            help='Load specific environment config (f.e. use "--env local" to load .env.local config')
+                            help='Load specific environment config (f.e. use "--env local" to load .env config')
         parser.add_argument('-v', '--verbose', default=0, action='count')
 
         return parser.parse_args()
@@ -141,7 +141,7 @@ class App:
     def __load_dotenv(env):
         """
         Method loads config file based on passed value.
-        :param env: config file postfix. For example file .env.local will be loaded for env=local
+        :param env: config file postfix. For example file .env will be loaded for env=local
         :return: void
         """
         if env:

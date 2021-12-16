@@ -134,7 +134,7 @@ class App:
         parser.add_argument('-c', '--cnt', default=3, type=int, help='Number of result pages to crawl')
         parser.add_argument('-v', '--verbose', default=0, action='count')
         parser.add_argument('-e', '--env',
-                            help='Load specific environment config (f.e. use "--env local" to load .env.local config')
+                            help='Load specific environment config (f.e. use "--env local" to load .env config')
 
         return parser.parse_args()
 
@@ -157,7 +157,7 @@ class App:
     def __load_dotenv(env):
         """
         Method loads config file based on passed value.
-        :param env: config file postfix. For example file .env.local will be loaded for env=local
+        :param env: config file postfix. For example file .env will be loaded for env=local
         :return: void
         """
         if env:
