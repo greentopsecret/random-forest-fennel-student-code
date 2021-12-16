@@ -24,13 +24,13 @@ class MongoDBClient:
         self.collection = client[dbname].get_collection(collection)
 
     def find_newer_than(self, last_ad) -> list:
+        # TODO: make sure that documents are sorter correctly
         filter_ = {'_id': {'$gt': ObjectId(last_ad['incoming_id'])}} if last_ad else {}
-        return list(self.collection.find(filter_))
+        return list(self.collection.find(filter_).limit(10))
 
 
 class PostgreSQLClient:
     def __init__(self, host, port, user, password, database):
-
         # init logger
         self.logger = logging.getLogger(self.__class__.__name__)
 
@@ -66,23 +66,55 @@ class EbayAdsTransformer:
     def transform(self, ads):
 
         for ad in ads:
-            ad['price_raw'] = ad['price']
-            if re.search(r'Zu verschenken', ad['price']):
-                ad['price_comment'] = 'give away'
-            elif re.search(r' VB', ad['price']):
-                ad['price_comment'] = 'negotiation'
-            else:
-                ad['price_comment'] = ''
-            price = re.sub(r'[^\d]', '', ad['price'])
-            ad['price'] = int(price) if price else 0
             ad['provider'] = EbayAdsTransformer.PROVIDER_NAME
             ad['incoming_id'] = str(ad['_id'])
             ad['transformed_at'] = datetime.now()
-            ad['location_zip'] = re.sub(r'[^\d]', '', ad['location'])
+
+            ad['location_zip'] = self.__extract_zip(ad['location'])
+
+            ad['size_raw'] = ad['size'] if 'size' in ad else ''
+            ad['size'] = self.__extract_size(ad['size_raw'])
+
+            ad['rooms_raw'] = ad['rooms'] if 'rooms' in ad else ''
+            ad['rooms'] = self.__extract_rooms(ad['rooms_raw'])
+
+            ad['price_raw'] = ad['price'] if 'price' in ad else ''
+            ad['price'], ad['price_comment'] = self.__extract_price(ad['price_raw'])
 
             del ad['_id']
 
         return ads
+
+    @staticmethod
+    def __extract_zip(location):
+        m = re.search(r'(\d{5})', location)
+        return int(m.group(1)) if m else None
+
+    @staticmethod
+    def __extract_size(size_raw):
+        m = re.search(r'\b(\d{2,3}) m²', size_raw)
+        s = m.group(1) if m else ''
+        return int(s) if s and s.isnumeric() else None
+
+    @staticmethod
+    def __extract_rooms(rooms_raw):
+        r = rooms_raw.replace(',', '.')
+        r = re.sub(r'[^.\d]', '', r)
+        return float(r) if len(r) else None
+
+    @staticmethod
+    def __extract_price(price_raw):
+        p = ''.join(list(filter(str.isdigit, list(price_raw))))
+        p = int(p) if len(p) and p.isnumeric() else None
+
+        if re.search(r'Zu verschenken', price_raw):
+            c = 'give away'
+        elif re.search(r' VB', price_raw):
+            c = 'negotiation'
+        else:
+            c = ''
+
+        return p, c
 
 
 class App:

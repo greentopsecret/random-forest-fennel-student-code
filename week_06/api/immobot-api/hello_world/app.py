@@ -32,12 +32,13 @@ class SearchRequest(Base):
     size_min = Column(Integer)
 
     # TODO: updated_at
+    # TODO: locations (zip codes)
 
     def __repr__(self):
         return """
-pricemax: %s;    
-roomsmin: %s;  
-sizemin: %s;    
+price max: %s;    
+rooms min: %s;  
+size min: %s;    
         """ % (self.price_max, self.rooms_min, self.size_min)
 
     def set_size_min(self, size):

@@ -2,30 +2,32 @@
 set -e
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-  create table ads
-  (
-      index         serial primary key,
-      incoming_id   varchar(25),
-      provider      varchar(25),
-      provider_id   varchar(50),
-      title         varchar(255),
-      "desc"        text,
-      img           varchar(255),
-      link          varchar(255),
-      size          integer,
-      floor         integer,
-      rooms         numeric(2,1),
-      price         integer,
-      price_comment varchar(25),
-      price_raw     varchar(25),
-      location      varchar(255),
-      location_zip  varchar(10),
-      received_at   timestamp not null,
-      transformed_at timestamp default now() not null
-  );
-  create unique index ads_provider_internal_id_uindex on ads (provider, provider_id);
+create table ads
+(
+    index         serial primary key,
+    incoming_id   varchar(25),
+    provider      varchar(25),
+    provider_id   varchar(50),
+    title         varchar(255),
+    "desc"        text,
+    img           varchar(255),
+    link          varchar(255),
+    size_raw      varchar(10),
+    size          integer,
+    floor         integer,
+    rooms_raw     varchar(10),
+    rooms         numeric(2,1),
+    price         integer,
+    price_comment varchar(25),
+    price_raw     varchar(25),
+    location      varchar(255),
+    location_zip  varchar(10),
+    received_at   timestamp not null,
+    transformed_at timestamp default now() not null
+);
+create unique index ads_provider_internal_id_uindex on ads (provider, provider_id);
 
-  comment on column ads.incoming_id is 'PK from raw data (in NoSQL DB)';
+comment on column ads.incoming_id is 'PK from raw data (in NoSQL DB)';
 
 
 create table search_requests
@@ -41,6 +43,10 @@ create table search_requests
     UNIQUE(chat_id)
 );
 
+CREATE INDEX ON search_requests (price_max);
+CREATE INDEX ON search_requests (rooms_min);
+CREATE INDEX ON search_requests (size_min);
+
 create table search_requests_zip
 (
     id                   serial primary key,
@@ -51,5 +57,12 @@ create table search_requests_zip
         REFERENCES search_requests(id),
     UNIQUE(search_request_id, zip)
 );
+
+CREATE INDEX ON search_requests_zip (zip);
+
+#DROP table search_requests_zip;
+#DROP table search_requests;
+#DROP table ads;
+
 EOSQL
 

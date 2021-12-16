@@ -2,6 +2,7 @@ import argparse
 import os
 import logging
 import random
+import re
 
 from attrdict import AttrDict
 import mechanicalsoup
@@ -67,6 +68,11 @@ class EbayCrawler:
             out.desc = el.select('.aditem-main p')[0].text.strip()
             out.price = el.select('.aditem-main--middle--price')[0].text.strip()
             out.location = el.select('.aditem-main--top--left')[0].text.strip()
+
+            bottom = el.select('.aditem-main--bottom')[0].select('.simpletag')
+            out.size = bottom[0].text.strip() if bottom[0] else ''
+            out.rooms = bottom[1].text.strip() if bottom[1] else ''
+
             out.received_at = datetime.now()
 
             results.append(out)

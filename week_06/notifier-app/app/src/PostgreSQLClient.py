@@ -15,7 +15,18 @@ class PostgreSQLClient:
             return cursor.fetchone()
 
     def find_chats_by_ad(self, ad):
-        return [398074162]
+        sql = '' \
+              'SELECT chat_id ' \
+              'FROM search_requests ' \
+              'WHERE ' \
+              '(price_max IS NULL OR price_max >= %d) AND ' \
+              '(size_min IS NULL OR size_min >= %d) AND ' \
+              '(rooms_min IS NULL OR rooms_min <= %d)' % \
+              (ad['price'], ad['size'], ad['rooms'])
+
+        with self.engine.connect() as conn:
+            cursor = conn.execute(sql)
+            return cursor.fetchall()
 
     def find_ads_since(self, index: int):
         sql = 'SELECT * FROM ads WHERE index > %d ORDER BY index ASC' % index
