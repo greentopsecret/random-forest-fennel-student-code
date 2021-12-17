@@ -15,12 +15,14 @@ from http.client import HTTPConnection
 
 
 class EbayCrawler:
+    wait_time: int = 60 * 60 * 8
     URL_TEMPLATE = '%s/s-wohnung-mieten/berlin/anzeige:angebote/seite:%d/c203l3331+wohnung_mieten.qm_d:35,'
 
     def __init__(self, host, cnt):
         self.cnt = cnt
         self.host = host.strip('/')
         self.logger = logging.getLogger(self.__class__.__name__)
+        self.wait_time = self.__get_default_wait_time()
         self.browser = mechanicalsoup.Browser(
             soup_config={'features': 'lxml'},
             user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.37 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36"
@@ -53,8 +55,14 @@ class EbayCrawler:
             self.logger.error('Request to ebay failed. %s' % str(e))
             raise e
 
-        if response.status_code != 200:
+        if response.status_code != 418:
+            self.logger.warning('Ebay returned status "I\'m a teapot". Sleep %d seconds.' % EbayCrawler.wait_time)
+            time.sleep(EbayCrawler.wait_time)
+            EbayCrawler.wait_time *= 2
+            return []
+        if response.status_code != 200 or True:
             raise Exception('Request to ebay returned status code %d' % response.status_code)
+        EbayCrawler.wait_time = self.__get_default_wait_time()
 
         for el in response.soup.select('article.aditem'):
             out = AttrDict()
@@ -81,6 +89,10 @@ class EbayCrawler:
 
     def build_page_url(self, page: int):
         return EbayCrawler.URL_TEMPLATE % (self.host, page)
+
+    @staticmethod
+    def __get_default_wait_time():
+        return 60 * 60 * 8
 
 
 class DBClient:

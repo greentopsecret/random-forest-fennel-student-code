@@ -82,9 +82,9 @@ class App:
         :param env: config file postfix. For example file .env will be loaded for env=local
         :return: void
         """
-        # filename = '%s/../.env' % os.path.dirname(os.path.realpath(__file__))
-        # if os.path.isfile(filename):
-        #     load_dotenv(dotenv_path=filename)
+        filename = '%s/../.env' % os.path.dirname(os.path.realpath(__file__))
+        if os.path.isfile(filename):
+            load_dotenv(dotenv_path=filename)
         if env:
             filename = '%s/../.env.%s' % (os.path.dirname(os.path.realpath(__file__)), env)
             load_dotenv(dotenv_path=filename)

@@ -19,7 +19,7 @@ services:
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
 
-#  database:
+#  postgres:
 #    image: 536200232045.dkr.ecr.eu-west-1.amazonaws.com/immobot-postgres-repository:latest
 #    environment:
 #      PGDATA: /data/postgres
